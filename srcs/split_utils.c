@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 13:31:14 by kyoukim           #+#    #+#             */
-/*   Updated: 2020/12/29 21:00:40 by hyulee           ###   ########.fr       */
+/*   Updated: 2020/12/30 20:00:22 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	count_words(char const *s, char c)
 	word_count = 0;
 	while (*s)
 	{
-		if (*s == '\"' && !(flag & DQUOTE))
+		if (*s == '\'' && !(flag & DQUOTE))
 			flag ^= QUOTE;
-		else if (*s == '\'' && !(flag & QUOTE))
+		else if (*s == '\"' && !(flag & QUOTE))
 			flag ^= DQUOTE;
 		if (!(flag & QUOTE) && !(flag & DQUOTE))
 		{
@@ -32,6 +32,8 @@ static int	count_words(char const *s, char c)
 		}
 		s++;
 	}
+	if (flag & QUOTE || flag & DQUOTE)
+		++word_count;
 	return (word_count);
 }
 
@@ -67,9 +69,9 @@ static int	put_words_in_ans(char **ans, char *s, char c)
 			while (((flag & QUOTE || flag & DQUOTE) && s[j] == c)
 					|| (s[j] != c && s[j]))
 			{
-				if (s[j] == '\"' && !(flag & DQUOTE))
+				if (s[j] == '\'' && !(flag & DQUOTE))
 					flag ^= QUOTE;
-				else if (s[j] == '\'' && !(flag & QUOTE))
+				else if (s[j] == '\"' && !(flag & QUOTE))
 					flag ^= DQUOTE;
 				++j;
 			}

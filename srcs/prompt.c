@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2020/12/30 14:24:03 by kyoukim          ###   ########.fr       */
+/*   Updated: 2020/12/30 21:21:45 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,37 @@ int		handle_eof(t_state *s, char **input, int *input_flag)
 	return (1);
 }
 
-/*
-static void	print_cmds(t_state *s)
+int	is_quote_error(t_cmds *cmds)
 {
-	int i = 0;
-	while (s->cmds)
+	t_tok	*tok;
+
+	tok = cmds->tokens;
+	while (tok)
 	{
-		ft_printf("-----------------------------cmd-----------------------\n");
-		while (s->cmds->tokens)
-		{
-			i = 0;
-			ft_printf("---------------------pipe-----------------------\n");
-			while (s->cmds->tokens->tokens[i])
-			{
-				ft_printf("token : %s\n", s->cmds->tokens->tokens[i]);
-				i++;
-			}
-			s->cmds->tokens = s->cmds->tokens->next;
-		}
-		s->cmds = s->cmds->next;
+		if (tok->flag != 0)
+			return (1);
+		tok = tok->next;
 	}
-}*/
+	return (0);
+}
+
+
+void	execute(t_state *s, char **envp)
+{
+	s->curr_cmds = s->cmds;
+	while (s->curr_cmds)
+	{
+		if (is_quote_error(s->curr_cmds))
+		{
+			ft_printf("ERROR: multi-line disabled.\n");
+			s->curr_cmds = s->curr_cmds->next;
+			continue;
+		}
+		execute_cmd(s, envp);
+		s->curr_cmds = s->curr_cmds->next;
+	}
+	free_command(&(s->cmds));
+}
 
 void	prompt(t_state *s, char **envp)
 {
@@ -78,16 +88,10 @@ void	prompt(t_state *s, char **envp)
 			write(1, ">", 1);
 		input_flag = 0;
 		gnl_ret = get_next_line(0, &input);
+			if (gnl_ret == 0)  // not sure about
+				continue;  // these 2 lines
 		s->input = input;
 		parse_line(s, s->input);
-		if (ft_strcmp(s->input, "exit") == 0)
-			exit(1);
-		s->curr_cmds = s->cmds;
-		while (s->curr_cmds)
-		{
-			execute(s, envp);
-			s->curr_cmds = s->curr_cmds->next;
-		}
-		free_command(s->cmds);
+		execute(s, envp);
 	}
 }

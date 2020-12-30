@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2020/12/30 14:36:13 by kyoukim          ###   ########.fr       */
+/*   Updated: 2020/12/30 21:02:26 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct 		s_env
 typedef struct		s_tok
 {
 	char			**tokens;
+	int			flag;
 	struct s_tok	*next;
 }					t_tok;
 
@@ -73,6 +74,7 @@ typedef struct		s_state
 	t_cmds			*cmds;
 	t_cmds			*curr_cmds;
 	char			*input;
+	int			flag;
 }					t_state;
 
 void	frees(void *s1, void *s2, void *s3);
@@ -100,6 +102,7 @@ int		get_tok_size(t_tok *tok);
 t_tok	*create_tok(char **data);
 void	append_tok(t_tok **tok, t_tok *new);
 
+void	remove_quotes(t_tok *tok,char **tokens);
 void	parse_line(t_state *s, char *input);
 
 t_cmds	*create_command(t_tok *data);
@@ -108,10 +111,11 @@ void	append_command(t_cmds **cmds, t_cmds *new);
 char	**split_delimiter(char *s, char c);
 
 int		execute_pipe(t_state *s, int read, int write, char **envp);
-int		execute(t_state *s, char **envp);
+int		execute_cmd(t_state *s, char **envp);
+void	execute(t_state *s, char **envp);
 
 void	ft_env(t_state *s);
 void	ft_export(t_state *s, t_cmd cmd);
 void	ft_unset(t_state *s, t_cmd cmd);
-
+void	ft_exit();
 #endif

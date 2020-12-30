@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2020/12/30 14:28:35 by kyoukim          ###   ########.fr       */
+/*   Updated: 2020/12/30 21:21:37 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,22 @@ static int	execute_builtin(t_state *s, t_cmd cmd)
 {
 	if (ft_strcmp(cmd.command, "env") == 0)
 	{
-		return ((int)ft_env(s) = 1);
+		ft_env(s);
+		return (1);
 	}
 	else if (ft_strcmp(cmd.command, "export") == 0)
 	{
-		return ((int)ft_export(s, cmd) = 1);
+		ft_export(s, cmd);
+		return (1);
 	}
 	else if (ft_strcmp(cmd.command, "unset") == 0)
 	{
-		return ((int)ft_unset(s, cmd) = 1);
+		ft_unset(s, cmd);
+		return (1);
+	}
+	else if (ft_strcmp(cmd.command, "exit") == 0)
+	{
+		ft_exit();
 	}
 	return NOT_A_BUILTIN;
 }
@@ -80,15 +87,19 @@ int	execute_pipe(t_state *s, int read, int write, char **envp)
 	return (SUCCESS);
 }
 
-int	execute(t_state *s, char **envp)
+int	execute_cmd(t_state *s, char **envp)
 {
+	int	i;
+	int	tok_size;
 	pid_t	ret;
 	int	read;
 	int	pipefd[2];
 
 	ret = 0;
 	read = STDIN_FILENO;
-	while (s->curr_cmds->tokens)
+	tok_size = get_tok_size(s->curr_cmds->tokens);
+	i = -1;
+	while (++i < tok_size)
 	{
 		if (pipe(pipefd) < 0)
 			exit(0);
