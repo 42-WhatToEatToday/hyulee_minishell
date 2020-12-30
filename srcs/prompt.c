@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2020/12/29 22:35:09 by hyulee           ###   ########.fr       */
+/*   Updated: 2020/12/30 14:24:03 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ void	prompt(t_state *s, char **envp)
 			execute(s, envp);
 			s->curr_cmds = s->curr_cmds->next;
 		}
+		free_command(s->cmds);
 	}
 }

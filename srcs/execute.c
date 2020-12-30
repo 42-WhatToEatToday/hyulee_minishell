@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2020/12/29 22:44:39 by hyulee           ###   ########.fr       */
+/*   Updated: 2020/12/30 14:28:35 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,15 @@ static int	execute_builtin(t_state *s, t_cmd cmd)
 {
 	if (ft_strcmp(cmd.command, "env") == 0)
 	{
-		ft_env(s);
-		return (1);
+		return ((int)ft_env(s) = 1);
 	}
 	else if (ft_strcmp(cmd.command, "export") == 0)
 	{
-		ft_export(s, cmd);
-		return (1);
+		return ((int)ft_export(s, cmd) = 1);
 	}
 	else if (ft_strcmp(cmd.command, "unset") == 0)
 	{
-		ft_unset(s, cmd);
-		return (1);
+		return ((int)ft_unset(s, cmd) = 1);
 	}
 	return NOT_A_BUILTIN;
 }
@@ -59,6 +56,8 @@ int	execute_pipe(t_state *s, int read, int write, char **envp)
 	cmd.command = s->curr_cmds->tokens->tokens[0];
 	cmd.argv = s->curr_cmds->tokens->tokens;
 
+	if (execute_builtin(s, cmd))
+		return (SUCCESS);
 	if ((pid = fork()) < 0)
 		exit(0);
 	if (pid == 0)
@@ -73,31 +72,23 @@ int	execute_pipe(t_state *s, int read, int write, char **envp)
 			dup2(write, STDOUT_FILENO);
 			close(write);
 		}
-		if (!execute_builtin(s, cmd))
-		{
-			if (execve(s->curr_cmds->tokens->tokens[0], s->curr_cmds->tokens->tokens, envp) < 0)
-				exit(0); // error message needed
-		}
-		exit(0);
+		if (execve(s->curr_cmds->tokens->tokens[0], s->curr_cmds->tokens->tokens, envp) < 0)
+			exit(0); // error message needed
 	}
 	else
 		wait(NULL);
-	return (1);
+	return (SUCCESS);
 }
 
 int	execute(t_state *s, char **envp)
 {
-	int	i;
 	pid_t	ret;
 	int	read;
 	int	pipefd[2];
-	int	tok_size;
 
 	ret = 0;
 	read = STDIN_FILENO;
-	tok_size = get_tok_size(s->curr_cmds->tokens);
-	i = -1;
-	while (++i < tok_size)
+	while (s->curr_cmds->tokens)
 	{
 		if (pipe(pipefd) < 0)
 			exit(0);

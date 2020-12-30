@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2020/12/29 22:29:25 by hyulee           ###   ########.fr       */
+/*   Updated: 2020/12/30 14:36:13 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ typedef struct		s_state
 
 void	frees(void *s1, void *s2, void *s3);
 void	free_array(char **arrs);
+void	free_command(t_cmds **cmds);
+void	free_tok(t_tok **tok);
 
 t_env	*find_env(t_env **head, char *key);
 t_env	*create_new_env(char *key, char *value);
