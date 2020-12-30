@@ -6,14 +6,14 @@
 #    By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/21 14:46:02 by hyulee            #+#    #+#              #
-#    Updated: 2020/12/29 22:40:32 by hyulee           ###   ########.fr        #
+#    Updated: 2020/12/30 21:03:08 by kyoukim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = gcc
-CFLAGS = -fsanitize=address -Wall -Wextra -Werror
+CFLAGS = -fsanitize=address -g -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = rcs 
 RM = rm -f
@@ -31,6 +31,7 @@ SRCS =	./srcs/main.c \
 		./srcs/ft_env.c \
 		./srcs/ft_export.c \
 		./srcs/ft_unset.c \
+		./srcs/ft_exit.c \
 		./srcs/tokenize.c \
 		./srcs/free_utils.c 
 

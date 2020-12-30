@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 21:29:24 by hyulee            #+#    #+#             */
-/*   Updated: 2020/08/05 06:11:46 by hyulee           ###   ########.fr       */
+/*   Updated: 2020/12/30 18:00:36 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@ static int					get_count(unsigned long long n, int base_num)
 	int count;
 
 	count = 0;
-	if (n < 0)
-	{
-		n = n / base_num * (-1);
-		count++;
-	}
 	while (n > 0)
 	{
 		n /= base_num;
