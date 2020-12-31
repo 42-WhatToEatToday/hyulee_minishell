@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2020/12/30 21:21:37 by kyoukim          ###   ########.fr       */
+/*   Updated: 2020/12/31 23:49:54 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,17 @@
 
 static int	execute_builtin(t_state *s, t_cmd cmd)
 {
-	if (ft_strcmp(cmd.command, "env") == 0)
+	if (ft_strcmp(cmd.command, "cd") == 0)
+	{
+		ft_cd(s, cmd);
+		return (1);
+	}
+	else if (ft_strcmp(cmd.command, "pwd") == 0)
+	{
+		ft_pwd(s);
+		return (1);
+	}
+	else if (ft_strcmp(cmd.command, "env") == 0)
 	{
 		ft_env(s);
 		return (1);
