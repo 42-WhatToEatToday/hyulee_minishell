@@ -6,13 +6,28 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 07:00:32 by hyulee            #+#    #+#             */
-/*   Updated: 2020/12/29 13:52:53 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/01 02:31:26 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_state *g_state;
+
+static int	is_valid_identifier(char c)
+{
+	return ((65 <= c && c <= 90) || c == '_');
+}
+
+static int	get_argv_num(t_cmd cmd)
+{
+	int n;
+
+	n = 0;
+	while (cmd.argv[n])
+		n++;
+	return (n);
+}
 
 static void	print_all(t_env *env)
 {
@@ -33,11 +48,17 @@ void		ft_export(t_state *s, t_cmd cmd)
 	char	*value;
 	
 	i = 1;
+	cmd.argv_num = get_argv_num(cmd);
 	if (cmd.argv_num == 1)
 		return(print_all(s->env_head));
 	while (cmd.argv[i])
 	{
 		seperate_key_value(cmd.argv[i], &key, &value);
+		if (!is_valid_identifier(key[0]))
+		{
+			ft_printf("bash: export: \'%c\': not a valid identifier\n", key[0]);
+			break;
+		}
 		change_env(&(s->env_head), key, value);
 		frees(key, value, 0);
 		i++;
