@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/02 20:00:41 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/02 23:59:18 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct		s_state
 	t_cmds			*curr_cmds;
 	char			*input;
 	int				exitnum;
+	int				flag;
 }					t_state;
 
 void	frees(void *s1, void *s2, void *s3);
@@ -119,6 +120,7 @@ void	execute(t_state *s, char **envp);
 
 int		get_argv_num(t_cmd cmd);
 
+void	ft_echo(t_state *s, t_cmd cmd);
 void	ft_cd(t_state *s, t_cmd cmd);
 void	ft_pwd(t_state *s);
 void	ft_env(t_state *s);
