@@ -48,7 +48,6 @@ void		ft_export(t_state *s, t_cmd cmd)
 	char	*value;
 	
 	i = 1;
-	//cmd.argv_num = get_argv_num(cmd);
 	if (cmd.argv_num == 1)
 		return(print_all(s->env_head));
 	while (cmd.argv[i])
