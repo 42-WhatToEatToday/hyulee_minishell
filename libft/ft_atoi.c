@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 01:17:39 by hyulee            #+#    #+#             */
-/*   Updated: 2020/07/21 04:07:17 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/02 15:50:55 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			ft_atoi(const char *str)
 	if (check_limits(str, i, sign) == 1)
 		return (-1);
 	else if (check_limits(str, i, sign) == -1)
-		return (0);
+		return (-1);
 	while ('0' <= str[i] && str[i] <= '9')
 	{
 		result = (result * 10) + (str[i] - '0');

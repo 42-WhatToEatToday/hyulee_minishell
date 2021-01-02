@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2020/12/31 23:49:54 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/02 14:28:22 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	execute_builtin(t_state *s, t_cmd cmd)
 	}
 	else if (ft_strcmp(cmd.command, "exit") == 0)
 	{
-		ft_exit();
+		ft_exit(s, cmd);
 	}
 	return NOT_A_BUILTIN;
 }
@@ -72,6 +72,7 @@ int	execute_pipe(t_state *s, int read, int write, char **envp)
 
 	cmd.command = s->curr_cmds->tokens->tokens[0];
 	cmd.argv = s->curr_cmds->tokens->tokens;
+	cmd.argv_num = get_argv_num(cmd);
 
 	if (execute_builtin(s, cmd))
 		return (SUCCESS);
@@ -109,19 +110,20 @@ int	execute_cmd(t_state *s, char **envp)
 	read = STDIN_FILENO;
 	tok_size = get_tok_size(s->curr_cmds->tokens);
 	i = -1;
+	s->curr_cmds->curr_tok = s->curr_cmds->tokens;
 	while (++i < tok_size)
 	{
 		if (pipe(pipefd) < 0)
-			exit(0);
+			exit(1);
 		if (i == tok_size - 1)
 			ret = execute_pipe(s, read, STDOUT_FILENO, envp);
 		else
 			ret = execute_pipe(s, read, pipefd[WRITE_END], envp);
 		if (ret == ERROR)
-			exit(0);
+			exit(1);
 		close(pipefd[WRITE_END]);
 		read = pipefd[READ_END];
-		s->curr_cmds->tokens = s->curr_cmds->tokens->next;
+		s->curr_cmds->curr_tok = s->curr_cmds->curr_tok->next;
 	}
 	return (1);
 }
