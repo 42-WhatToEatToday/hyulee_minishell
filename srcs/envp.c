@@ -6,26 +6,13 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 06:19:10 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/02 19:16:43 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/02 23:12:22 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_state	*g_state;
-
-void		free_envp(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-	{
-		free(envp[i]);
-		i++;
-	}
-	free(envp);
-}
 
 static void	bind_key_value(char *envp, t_env *env, int len)
 {

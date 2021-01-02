@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 06:11:45 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/02 12:55:11 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/02 23:12:38 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	ft_env(t_state *s)
 		ft_printf("%s\n", *envp);
 		envp++;
 	}
+	free_arrays(envp);
 }
