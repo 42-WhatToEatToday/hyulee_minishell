@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 05:28:47 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/02 22:44:57 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/02 23:17:16 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,17 @@ static char	*get_value(t_env **head, char *key)
 	char	*value;
 
 	env = find_env(head, key);
-	value = ft_strdup(env->value);
+	if (env)	
+		value = ft_strdup(env->value);
+	else
+		value = NULL;
 	return (value);
 }
 
-static void	free_all(char **new_piped, char *value, char *piped)
-{
-	free_array(new_piped);
-	free(value);
-	free(piped);
-}
-
-static char	**change_env_var(t_state *s, char **piped, int i, int j)
+static char	**get_new_piped(char **new_piped, char **piped, int i, int j)
 {
 	int	start;
-	char	**new_piped;
 	int	len;
-	char	*value;
-	char	*joined;
 
 	if (!(new_piped = (char **)malloc(sizeof(char *) * 4)))
 		return (NULL);
@@ -77,10 +70,26 @@ static char	**change_env_var(t_state *s, char **piped, int i, int j)
 	new_piped[1][len] = '\0';
 	while (len--)
 		new_piped[1][len] = piped[i][--j];
+	return (new_piped);
+}
+
+static char	**change_env_var(t_state *s, char **piped, int i, int j)
+{
+	char	**new_piped;
+	char	*value;
+	char	*joined;
+
+	new_piped = NULL;
+	new_piped = get_new_piped(new_piped, piped, i, j);
 	value = get_value(&(s->env_head), new_piped[1]);
-	joined = join_strings(new_piped[0], value, new_piped[2]);
-	free_all(new_piped, value, piped[i]);
-	piped[i] = joined;
+	if (value)
+	{
+		joined = join_strings(new_piped[0], value, new_piped[2]);
+		free(piped[i]);
+		piped[i] = joined;
+		free(value);
+	}
+	free_array(new_piped);
 	return (piped);
 }
 
