@@ -6,13 +6,16 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 21:01:46 by kyoukim           #+#    #+#             */
-/*   Updated: 2020/12/30 21:02:13 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/02 13:30:09 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit()
+int	ft_exit(t_state *s, t_cmd cmd)
 {
-	exit(1);
+	ft_putstr_fd("exit\n", 2);
+	if (cmd.argv_num == 1)
+		free_exit(s, s->exitnum);
+	return (1);
 }

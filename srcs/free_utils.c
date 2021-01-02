@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 16:26:07 by hyulee            #+#    #+#             */
-/*   Updated: 2020/12/30 18:09:24 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/02 13:58:15 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,27 @@ void	free_command(t_cmds **cmds)
 {
 	t_cmds	*next_node;
 
+	ft_printf("command free in\n");
 	if (!cmds)
 		return ;
 	while (*cmds)
 	{
+		ft_printf("command free start\n");
 		next_node = (*cmds)->next;
 		if ((*cmds)->tokens)
+		{
+			ft_printf("tokens free start\n");
 			free_tok(&((*cmds)->tokens));
+		}
 		free(*cmds);
 		*cmds = next_node;
 	}
 	return ;
+}
+
+void	free_exit(t_state *s, int exitnum)
+{
+	free(s->input);
+	free_command(&(s->cmds));
+	exit(exitnum);
 }

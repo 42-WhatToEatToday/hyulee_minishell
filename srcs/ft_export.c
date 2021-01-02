@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 07:00:32 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/01 02:31:26 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/02 12:54:38 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_valid_identifier(char c)
 	return ((65 <= c && c <= 90) || c == '_');
 }
 
-static int	get_argv_num(t_cmd cmd)
+int		get_argv_num(t_cmd cmd)
 {
 	int n;
 
@@ -48,7 +48,7 @@ void		ft_export(t_state *s, t_cmd cmd)
 	char	*value;
 	
 	i = 1;
-	cmd.argv_num = get_argv_num(cmd);
+	//cmd.argv_num = get_argv_num(cmd);
 	if (cmd.argv_num == 1)
 		return(print_all(s->env_head));
 	while (cmd.argv[i])
