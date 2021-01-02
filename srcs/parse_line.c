@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 18:34:48 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/02 13:27:14 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/02 22:23:16 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,18 @@ void	parse_line(t_state *s, char *input)
 	int		i;
 
 	if (!(cmds = split_delimiter(input, ';')))
-		exit(0);
+		exit(1);
 	i = 0;
 	while (cmds[i])
 	{
 		if (!(cmds_curr = create_command(NULL)))
-			exit(0);
+			exit(1);
 		if (!(piped = split_delimiter(cmds[i], '|')))
-			exit(0);
+			exit(1);
+		if (!(piped = handle_env_var(s, piped)))
+			exit(1);
 		if (!(tokenize(cmds_curr, piped)))
-			exit(0);
+			exit(1);
 		append_command(&(s->cmds), cmds_curr);
 		free_array(piped);
 		i++;
