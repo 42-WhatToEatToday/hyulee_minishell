@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:40:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/02 13:46:49 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/03 00:24:14 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	parse_env(t_env **head, char *envp[])
 int			main(int argc, char *argv[], char *envp[]) 
 {
 	t_state state;
+	char	**envp_head;
 
 	(void)argc;
 	(void)argv;
@@ -61,6 +62,8 @@ int			main(int argc, char *argv[], char *envp[])
 	signal(SIGINT, (void *)sigint_handler);
 	signal(SIGQUIT, (void *)sigquit_handler);
 	parse_env(&(state.env_head), envp);
-	prompt(&state, get_envp(&(state.env_head)));
+	envp_head = get_envp(&(state.env_head));
+	prompt(&state, envp_head);
+	free_array(envp_head);
 	return (0);	
 }
