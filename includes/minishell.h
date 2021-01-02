@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/02 16:10:59 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/02 20:00:41 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	append_tok(t_tok **tok, t_tok *new);
 
 void	remove_quotes(t_tok *tok,char **tokens);
 void	parse_line(t_state *s, char *input);
+char	**handle_env_var(t_state *s, char **piped);
 
 t_cmds	*create_command(t_tok *data);
 void	append_command(t_cmds **cmds, t_cmds *new);
