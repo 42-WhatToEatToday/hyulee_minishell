@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils2.c                                       :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/27 16:23:17 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/01 01:49:25 by hyulee           ###   ########.fr       */
+/*   Created: 2020/12/31 23:41:26 by hyulee            #+#    #+#             */
+/*   Updated: 2020/12/31 23:49:02 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,11 @@
 
 extern	t_state *g_state;
 
-void	seperate_key_value(char *argv, char **key, char **value)
+void	ft_pwd(t_state *s)
 {
-	size_t	i;
+	char	buf[MAX_PATH_LENGTH];
 
-	i = 0;
-	while (argv[i])
-	{
-		if (argv[i] == '=')
-			break;
-		i++;
-	}
-	if (ft_strlen(argv) == i)
-	{
-		*key = ft_strndup(argv, i);
-		*value = NULL;
-	}
-	else
-	{
-		*key = ft_strndup(argv, i);
-		*value = ft_strdup(&argv[i + 1]);
-	}
+	getcwd(buf, MAX_PATH_LENGTH);
+	change_env(&(s->env_head), "PWD", buf);
+	ft_printf("%s\n", buf);
 }

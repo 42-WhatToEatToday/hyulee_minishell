@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:40:53 by hyulee            #+#    #+#             */
-/*   Updated: 2020/12/30 19:15:51 by kyoukim          ###   ########.fr       */
+/*   Updated: 2020/12/31 22:18:32 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void init(t_state *s)
 	s->env_head = 0;
 	s->input = 0;
 	s->cmds = 0;
+	s->curr_cmds = 0;
+	s->flag = 0;
 }
 
 static int	parse_env(t_env **head, char *envp[])

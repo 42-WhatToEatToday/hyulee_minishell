@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2020/12/30 21:02:26 by kyoukim          ###   ########.fr       */
+/*   Updated: 2020/12/31 23:49:20 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct 		s_env
 typedef struct		s_tok
 {
 	char			**tokens;
-	int			flag;
+	int				flag;
 	struct s_tok	*next;
 }					t_tok;
 
@@ -74,7 +74,7 @@ typedef struct		s_state
 	t_cmds			*cmds;
 	t_cmds			*curr_cmds;
 	char			*input;
-	int			flag;
+	int				flag;
 }					t_state;
 
 void	frees(void *s1, void *s2, void *s3);
@@ -114,6 +114,8 @@ int		execute_pipe(t_state *s, int read, int write, char **envp);
 int		execute_cmd(t_state *s, char **envp);
 void	execute(t_state *s, char **envp);
 
+void	ft_cd(t_state *s, t_cmd cmd);
+void	ft_pwd(t_state *s);
 void	ft_env(t_state *s);
 void	ft_export(t_state *s, t_cmd cmd);
 void	ft_unset(t_state *s, t_cmd cmd);
