@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 20:00:45 by hyulee            #+#    #+#             */
-/*   Updated: 2020/12/29 15:30:37 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/04 01:13:55 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,19 @@ extern t_state *g_state;
 void sigint_handler(int signo)
 {
 	(void)signo;
-	ft_printf("\b\b  \nsh> ");
+	if (g_state->waiting == 0)
+	{
+		g_state->input = 0;
+		ft_printf("\b\b  \nsh> ");
+	}
+	else
+		ft_printf("\b\b");
 }
 
 void sigquit_handler(int signo)
 {
 	(void)signo;
 	ft_printf("\b\b  \b\b");
-	ft_printf("sigquit\n");
+	if (g_state->waiting == 1)
+		ft_printf("\b\b^\\Quit: 3\n");
 }

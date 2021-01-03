@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:40:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/03 00:24:14 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/04 01:13:01 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void init(t_state *s)
 	s->input = 0;
 	s->cmds = 0;
 	s->curr_cmds = 0;
+	s->waiting = 0;
 	s->exitnum = 0;
 }
 

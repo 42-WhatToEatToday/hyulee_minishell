@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 00:02:14 by hyulee            #+#    #+#             */
-/*   Updated: 2020/12/23 23:26:52 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/04 00:59:20 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,28 @@ char	*get_temp(char *backup, char *buf, ssize_t read_size)
 	else
 		return (ft_strjoin(backup, buf));
 }
+int		find_new_line(char **backup, char **buff, int fd, char **temp)
+{
+	ssize_t	read_size;
+	char	*buf;
+
+	buf = *buff;
+	if (ft_strchr(*backup, '\n') == 0)
+	{
+		read_size = read(fd, buf, BUFFER_SIZE);
+		if (read_size > 0)
+		{
+			buf[read_size] = '\0';
+			*temp = get_temp(*backup, buf, read_size);
+			if (*backup != 0)
+				free(*backup);
+			*backup = *temp;
+		}
+		return (read_size);
+	}
+	else
+		return (0);
+}
 
 int		get_next_line(int fd, char **line)
 {
@@ -59,14 +81,10 @@ int		get_next_line(int fd, char **line)
 		return (ERROR);
 	if (!(buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (ERROR);
-	while (ft_strchr(backup[fd], '\n') == 0
-			&& (read_size = read(fd, buf, BUFFER_SIZE)) > 0)
+	while ((read_size = find_new_line(&backup[fd], &buf, fd, &temp)) > 0)
 	{
-		buf[read_size] = '\0';
-		temp = get_temp(backup[fd], buf, read_size);
-		if (backup[fd] != 0)
-			free(backup[fd]);
-		backup[fd] = temp;
+		if (read_size < BUFFER_SIZE)
+			break;
 	}
 	if (read_size < 0)
 	{

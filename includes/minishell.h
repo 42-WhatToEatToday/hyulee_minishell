@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/03 23:53:48 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/04 01:12:47 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct		s_state
 	t_cmds			*cmds;
 	t_cmds			*curr_cmds;
 	char			*input;
+	int				waiting;
 	int				exitnum;
 	int				flag;
 }					t_state;

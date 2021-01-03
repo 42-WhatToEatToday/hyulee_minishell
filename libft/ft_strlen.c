@@ -6,7 +6,7 @@
 /*   By: hyulee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 16:36:17 by hyulee            #+#    #+#             */
-/*   Updated: 2020/07/04 01:51:12 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/04 01:35:01 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
+	if (s == NULL)
+		return (0);
 	while (s[i] != '\0')
 		i++;
 	return (i);

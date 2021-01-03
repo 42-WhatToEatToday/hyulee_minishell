@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/04 00:04:33 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/04 01:54:17 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ void	append_input(t_state *s, char **input)
 {
 	char	*temp;
 	
+	ft_printf("input :%s\n", *input);
 	if (!(temp = ft_strjoin(s->input, *input)))
+	{
+		ft_printf("%s\n", temp);
 		exit(1);
+	}
 	frees(s->input, *input, 0);
 	s->input = temp;
 }
@@ -88,8 +92,9 @@ void	prompt(t_state *s, char **envp)
 			write(1, ">", 1);
 		input_flag = 0;
 		gnl_ret = get_next_line(0, &input);
-			if (gnl_ret == 0)  // not sure about
-				continue;  // these 2 lines
+//		if (gnl_ret == 0 && handle_eof(s, &input, &input_flag))
+//			continue;  // these 2 lines
+//		append_input(s, &input);
 		s->input = input;
 		parse_line(s, s->input);
 		execute(s, envp);
