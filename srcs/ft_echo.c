@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:16:16 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/03 00:03:14 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/04 02:09:32 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_echo(t_state *s, t_cmd cmd)
 
 	i = 1;
 	s->flag = 0;
-	if (ft_strcmp(cmd.argv[i], "-n") == 0)
+	if (cmd.argv[i] && ft_strcmp(cmd.argv[i], "-n") == 0)
 	{
 		s->flag = 1;
 		i++;
@@ -36,4 +36,6 @@ void	ft_echo(t_state *s, t_cmd cmd)
 			ft_printf(" ");
 		i++;
 	}
+	if (cmd.argv_num == 1)
+		ft_printf("\n");
 }
