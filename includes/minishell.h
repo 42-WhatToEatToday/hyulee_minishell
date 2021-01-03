@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/02 23:59:18 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/03 23:53:48 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ int		execute_cmd(t_state *s, char **envp);
 void	execute(t_state *s, char **envp);
 
 int		get_argv_num(t_cmd cmd);
+
+char	**parse_path(t_state *s);
 
 void	ft_echo(t_state *s, t_cmd cmd);
 void	ft_cd(t_state *s, t_cmd cmd);

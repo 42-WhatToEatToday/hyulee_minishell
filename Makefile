@@ -6,14 +6,14 @@
 #    By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/21 14:46:02 by hyulee            #+#    #+#              #
-#    Updated: 2021/01/02 23:46:37 by hyulee           ###   ########.fr        #
+#    Updated: 2021/01/03 23:51:57 by hyulee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = gcc
-CFLAGS = -fsanitize=address -g -Wall -Wextra -Werror
+CFLAGS = -g3 -fsanitize=address -g -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = rcs 
 RM = rm -f
@@ -28,6 +28,7 @@ SRCS =	./srcs/main.c \
 		./srcs/signal.c \
 		./srcs/prompt.c \
 		./srcs/parse_line.c \
+		./srcs/parse_path.c \
 		./srcs/split_utils.c \
 		./srcs/ft_echo.c \
 		./srcs/ft_cd.c \
