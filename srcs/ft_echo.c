@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:16:16 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/04 02:09:32 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/05 05:14:47 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern	t_state	*g_state;
 
-void	ft_echo(t_state *s, t_cmd cmd)
+int	ft_echo(t_state *s, t_cmd cmd)
 {
 	int	i;
 
@@ -38,4 +38,5 @@ void	ft_echo(t_state *s, t_cmd cmd)
 	}
 	if (cmd.argv_num == 1)
 		ft_printf("\n");
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 22:24:36 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/02 23:48:00 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/05 05:13:12 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern	t_state *g_state;
 
-void	ft_cd(t_state *s, t_cmd cmd)
+int	ft_cd(t_state *s, t_cmd cmd)
 {
 	char buf[MAX_PATH_LENGTH];
 
@@ -27,4 +27,5 @@ void	ft_cd(t_state *s, t_cmd cmd)
 	}
 	getcwd(buf, MAX_PATH_LENGTH);
 	change_env(&(s->env_head), "PWD", buf);
+	return (1);
 }

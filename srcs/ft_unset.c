@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 07:00:32 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/01 02:35:52 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/05 05:15:16 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_valid_identifier(char c)
 	return ((65 <= c && c <= 90) || c == '_');
 }
 
-void	ft_unset(t_state *s, t_cmd cmd)
+int	ft_unset(t_state *s, t_cmd cmd)
 {
 	int	i;
 	
@@ -34,4 +34,5 @@ void	ft_unset(t_state *s, t_cmd cmd)
 		delete_env(&(s->env_head), cmd.argv[i]);
 		i++;
 	}
+	return (1);
 }
