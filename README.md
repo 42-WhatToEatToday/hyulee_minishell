@@ -1,0 +1,33 @@
+# minhee's shell
+
+## Todo-list
+- [x]  구조체 만들기
+- [x]  signal
+    - [x]  Ctrl-C -> sigint
+    - [x]  Ctrl-\ -> sigquit
+    - [ ]  Ctrl-D -> EOF
+- [x]  envp
+    - [x]  linked list envp
+    - [x]  **evnp
+- [x]  명령줄 입력받기
+    - [ ]  \
+    - [x]  quote, dquote
+- [x]  tokenize
+    - [x]  quote, dquote
+    - [x]  space( )
+    - [ ]  \
+    - [x]  pipe(|)
+    - [x]  semicolon(;)
+- [x]  builtin command
+    - [x]  echo
+    - [x]  cd
+    - [x]  export
+    - [x]  unset
+    - [x]  env
+    - [x]  exit
+    - [x]  $?
+- [x]  $(env)
+- [x]  pipe
+- [x]  semicolon(;)
+- [ ]  < > >> redirection
+- [ ]  PATH 파싱 후 binary file execute
