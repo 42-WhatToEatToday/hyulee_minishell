@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 05:28:47 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/02 23:17:16 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/05 05:55:50 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ static char	*join_strings(const char *s1, const char *s2, const char *s3)
 	return (temp);
 }
 
-static char	*get_value(t_env **head, char *key)
+static char	*get_value(t_state *s, t_env **head, char *key)
 {
 	t_env	*env;
 	char	*value;
 
+	if (key[0] == '\?' && key[1] == '\0')
+		return (ft_itoa(s->exitnum));
 	env = find_env(head, key);
 	if (env)	
 		value = ft_strdup(env->value);
@@ -81,7 +83,7 @@ static char	**change_env_var(t_state *s, char **piped, int i, int j)
 
 	new_piped = NULL;
 	new_piped = get_new_piped(new_piped, piped, i, j);
-	value = get_value(&(s->env_head), new_piped[1]);
+	value = get_value(s, &(s->env_head), new_piped[1]);
 	if (value)
 	{
 		joined = join_strings(new_piped[0], value, new_piped[2]);

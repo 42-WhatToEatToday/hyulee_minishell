@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/05 05:22:23 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/05 05:40:21 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	execute_pipe(t_state *s, int rd, int wrt, char **envp)
 {
 	t_cmd	cmd;
 	pid_t	pid;
+	int	wstatus;
 
 	init_cmd(&cmd, s);
 	if (execute_builtin(s, cmd, rd, wrt))
@@ -68,20 +69,18 @@ void	execute_pipe(t_state *s, int rd, int wrt, char **envp)
 	if (pid == 0)
 	{
 		if (rd != STDIN_FILENO)
-		{
 			dup2(rd, STDIN_FILENO);
-			close(rd);
-		}
 		if (wrt != STDOUT_FILENO)
-		{
 			dup2(wrt, STDOUT_FILENO);
-			close(wrt);
-		}
 		if (execve(cmd.command, cmd.argv, envp) < 0)
 			exit(1); // error message needed
 	}
 	else
-		wait(NULL);
+	{
+		wait(&wstatus);
+		if (WIFEXITED(wstatus))
+			s->exitnum = WEXITSTATUS(wstatus);
+	}
 }
 
 int	execute_cmd(t_state *s, char **envp)
