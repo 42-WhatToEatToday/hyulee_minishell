@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 22:24:36 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/05 05:28:05 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/05 19:00:43 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_cd(t_state *s, t_cmd cmd)
 	if (chdir(cmd.argv[1]) == -1)
 	{
 		ft_printf("sh: %s: %s: No such file or directory\n", cmd.argv[0], cmd.argv[1]);
-		s->exitnum = 22;
+		s->exitnum = 22; // 일 아닌가요??
 	}
 	getcwd(buf, MAX_PATH_LENGTH);
 	change_env(&(s->env_head), "PWD", buf);

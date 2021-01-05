@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/05 05:40:21 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/05 19:09:33 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,19 @@ static	init_cmd(t_cmd *cmd, t_state *s)
 	cmd->argv_num = get_argv_num(*cmd);
 }
 
+static void	execute_error(t_cmd cmd)
+{
+	ft_putstr_fd("sh: ", 2);
+	ft_putstr_fd(cmd.command, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	write(2, '\n', 1);
+	if (errno == 13)
+		exit(126);
+	else if (errno == 2)
+		exit(127);
+	exit(1);
+}
 void	execute_pipe(t_state *s, int rd, int wrt, char **envp)
 {
 	t_cmd	cmd;
@@ -73,7 +86,7 @@ void	execute_pipe(t_state *s, int rd, int wrt, char **envp)
 		if (wrt != STDOUT_FILENO)
 			dup2(wrt, STDOUT_FILENO);
 		if (execve(cmd.command, cmd.argv, envp) < 0)
-			exit(1); // error message needed
+			execute_error(cmd);
 	}
 	else
 	{

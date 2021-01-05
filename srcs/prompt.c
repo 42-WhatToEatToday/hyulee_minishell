@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/04 23:23:38 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/05 18:28:11 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	execute(t_state *s, char **envp)
 		if (is_quote_error(s->curr_cmds))
 		{
 			ft_printf("ERROR: multi-line disabled.\n");
+			s->exitnum = 1;
 			s->curr_cmds = s->curr_cmds->next;
 			continue;
 		}
