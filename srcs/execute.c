@@ -6,13 +6,13 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/05 19:09:33 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/06 12:29:24 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	execute_builtin(t_state *s, t_cmd cmd)
+static int	execute_builtin(t_state *s, t_cmd cmd, int rd, int wrt)
 {
 	int ret;
 	int stin;
@@ -48,7 +48,7 @@ static int	execute_builtin(t_state *s, t_cmd cmd)
 	return (NOT_A_BUILTIN);
 }
 
-static	init_cmd(t_cmd *cmd, t_state *s)
+static void	init_cmd(t_cmd *cmd, t_state *s)
 {
 	cmd->command = s->curr_cmds->curr_tok->tokens[0];
 	cmd->argv = s->curr_cmds->curr_tok->tokens;
@@ -61,7 +61,7 @@ static void	execute_error(t_cmd cmd)
 	ft_putstr_fd(cmd.command, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(strerror(errno), 2);
-	write(2, '\n', 1);
+	ft_putstr_fd("\n", 2);
 	if (errno == 13)
 		exit(126);
 	else if (errno == 2)
