@@ -10,7 +10,7 @@
     - [x]  linked list envp
     - [x]  **evnp
 - [x]  명령줄 입력받기
-    - [ ]  \
+    - [ ]  \ -> gnl에서 받은 input의 가장 마지막 문자가 \ 일 때, 개행 후 다시 gnl 입력 받기
     - [x]  quote, dquote
 - [x]  tokenize
     - [x]  quote, dquote
