@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/07 02:26:00 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/07 02:26:17 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	execute_pipe(t_state *s, int rd, int wrt, char **envp)
 		cmd.argv[index] = NULL;
 	if (execute_builtin(s, cmd, rd, wrt))
 		return ;
+	check_path(s, &cmd);
 	if ((pid = fork()) < 0)
 		exit(1);
 	if (pid == 0)
@@ -100,7 +101,9 @@ void	execute_pipe(t_state *s, int rd, int wrt, char **envp)
 	}
 	else
 	{
+		s->waiting = 1;
 		wait(&wstatus);
+		s->waiting = 0;
 		if (WIFEXITED(wstatus))
 			s->exitnum = WEXITSTATUS(wstatus);
 	}
