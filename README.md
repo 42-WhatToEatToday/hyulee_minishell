@@ -5,7 +5,7 @@
 - [x]  signal
     - [x]  Ctrl-C -> sigint
     - [x]  Ctrl-\ -> sigquit
-    - [ ]  Ctrl-D -> EOF
+    - [x]  Ctrl-D -> EOF
 - [x]  envp
     - [x]  linked list envp
     - [x]  **evnp
