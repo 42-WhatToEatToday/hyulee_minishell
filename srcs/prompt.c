@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/04 01:54:17 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/04 02:15:18 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	append_input(t_state *s, char **input)
 {
 	char	*temp;
 	
-	ft_printf("input :%s\n", *input);
 	if (!(temp = ft_strjoin(s->input, *input)))
 	{
 		ft_printf("%s\n", temp);
