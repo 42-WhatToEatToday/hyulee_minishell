@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 20:00:45 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/04 01:13:55 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/07 00:23:38 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void sigint_handler(int signo)
 	(void)signo;
 	if (g_state->waiting == 0)
 	{
+		frees(g_state->input, 0, 0);
 		g_state->input = 0;
+		free_command(&(s->cmds)); 
 		ft_printf("\b\b  \nsh> ");
 	}
 	else
