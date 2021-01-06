@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/06 23:55:56 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/07 00:39:51 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,9 @@ void	execute_pipe(t_state *s, int rd, int wrt, char **envp)
 	}
 	else
 	{
+		s->waiting = 1;
 		wait(&wstatus);
+		s->waiting = 0;
 		if (WIFEXITED(wstatus))
 			s->exitnum = WEXITSTATUS(wstatus);
 	}
