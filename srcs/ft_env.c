@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 06:11:45 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/03 00:13:49 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/05 05:13:49 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_state *g_state;
 
-void	ft_env(t_state *s)
+int	ft_env(t_state *s)
 {
 	char **envp;
 	char **envp_head;
@@ -27,4 +27,5 @@ void	ft_env(t_state *s)
 		envp++;
 	}
 	free_array(envp_head);
+	return (1);
 }

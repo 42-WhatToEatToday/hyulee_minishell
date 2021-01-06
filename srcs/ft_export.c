@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 07:00:32 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/02 12:54:38 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/05 19:01:31 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	print_all(t_env *env)
 	}
 }
 
-void		ft_export(t_state *s, t_cmd cmd)
+int		ft_export(t_state *s, t_cmd cmd)
 {
 	int		i;
 	char	*key;
@@ -62,4 +62,5 @@ void		ft_export(t_state *s, t_cmd cmd)
 		frees(key, value, 0);
 		i++;
 	}
+	return (1);
 }

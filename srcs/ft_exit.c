@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 21:01:46 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/02 17:56:09 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/05 18:59:02 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,32 @@ static int	is_valid_exitnum(char *num)
 	{
 		if (ft_atoi(num) == -1 && (num[s] != '-' || 
 			(num[s + 1] != '1' || is_num(num[s + 2]))))
-			return (0);
-		return (1);
+			return (2);
+		return (0);
 	}
-	return (0);
+	return (1);
 }	
+
+static int	exit_with_designated_exitnum(t_cmd cmd)
+{
+	int	ret;
+
+	ret = 0;
+	if (ret = is_valid_exitnum(cmd.argv[1]))
+	{
+		ft_printf("in");
+		ft_putstr_fd("sh: exit: ", 2);
+		ft_putstr_fd(cmd.argv[1], 2);
+		ft_putstr_fd(": numeric argument required\n", 2);
+		if (ret == 1)
+			exit(128);
+		if (ret == 2)
+			exit(255);
+	}
+	else
+		exit(ft_atoi(cmd.argv[1]));
+}
+
 
 int	ft_exit(t_state *s, t_cmd cmd)
 {
@@ -53,18 +74,7 @@ int	ft_exit(t_state *s, t_cmd cmd)
 	if (cmd.argv_num == 1)
 		exit(s->exitnum);
 	else if (cmd.argv_num == 2)
-	{
-		if (!is_valid_exitnum(cmd.argv[1]))
-		{
-			ft_printf("in");
-			ft_putstr_fd("sh: exit: ", 2);
-			ft_putstr_fd(cmd.argv[1], 2);
-			ft_putstr_fd(": numeric argument required\n", 2);
-			exit(255);
-		}
-		else
-			exit(ft_atoi(cmd.argv[1]));
-	}
+		exit_with_designated_exitnum(cmd);
 	else
 	{
 		s->exitnum = 1;

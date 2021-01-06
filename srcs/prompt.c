@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/04 02:15:18 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/06 12:01:53 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	execute(t_state *s, char **envp)
 		if (is_quote_error(s->curr_cmds))
 		{
 			ft_printf("ERROR: multi-line disabled.\n");
+			s->exitnum = 1;
 			s->curr_cmds = s->curr_cmds->next;
 			continue;
 		}
@@ -91,9 +92,9 @@ void	prompt(t_state *s, char **envp)
 			write(1, ">", 1);
 		input_flag = 0;
 		gnl_ret = get_next_line(0, &input);
-//		if (gnl_ret == 0 && handle_eof(s, &input, &input_flag))
-//			continue;  // these 2 lines
-//		append_input(s, &input);
+	//	if (gnl_ret == 0 && handle_eof(s, &input, &input_flag))
+	//		continue;  // these 2 lines
+		append_input(s, &input);
 		s->input = input;
 		parse_line(s, s->input);
 		execute(s, envp);
