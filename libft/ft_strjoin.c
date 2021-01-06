@@ -6,17 +6,17 @@
 /*   By: hyulee <hyulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 05:28:47 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/04 01:50:03 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/06 23:35:02 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(const char *s1,const char *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
 	size_t	size;
 	char	*temp;
-	
+
 	if (s1 == 0 && s2 == 0)
 		return (ft_strdup(""));
 	if (s1 == 0 || s2 == 0)

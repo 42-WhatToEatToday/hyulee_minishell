@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 00:02:14 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/04 00:59:20 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/06 23:36:08 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*get_temp(char *backup, char *buf, ssize_t read_size)
 	else
 		return (ft_strjoin(backup, buf));
 }
+
 int		find_new_line(char **backup, char **buff, int fd, char **temp)
 {
 	ssize_t	read_size;
@@ -84,7 +85,7 @@ int		get_next_line(int fd, char **line)
 	while ((read_size = find_new_line(&backup[fd], &buf, fd, &temp)) > 0)
 	{
 		if (read_size < BUFFER_SIZE)
-			break;
+			break ;
 	}
 	if (read_size < 0)
 	{
