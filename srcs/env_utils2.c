@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 16:23:17 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/02 19:16:31 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/06 23:40:10 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	seperate_key_value(char *argv, char **key, char **value)
 	while (argv[i])
 	{
 		if (argv[i] == '=')
-			break;
+			break ;
 		i++;
 	}
 	if (ft_strlen(argv) == i)
