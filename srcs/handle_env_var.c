@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 05:28:47 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/05 06:02:10 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/07 02:56:40 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*get_value(t_state *s, t_env **head, char *key)
 	if (key[0] == '\?' && key[1] == '\0')
 		return (ft_itoa(s->exitnum));
 	env = find_env(head, key);
-	if (env)	
+	if (env)
 		value = ft_strdup(env->value);
 	else
 		value = NULL;
@@ -61,7 +61,8 @@ static char	**get_new_piped(char **new_piped, char **piped, int i, int j)
 	if (!(new_piped = (char **)malloc(sizeof(char *) * 4)))
 		return (NULL);
 	start = j;
-	while ((piped[i][j] != ' ') && (piped[i][j] != '\0'))
+	while ((piped[i][j] != ' ') && (piped[i][j] != '\0')
+			&& (piped[i][j] != '\"') && (piped[i][j] != '\''))
 		++j;
 	len = j - start - 1;
 	new_piped[0] = ft_strndup(piped[i], start);
@@ -99,14 +100,20 @@ char	**handle_env_var(t_state *s, char **piped)
 {
 	int	i;
 	int	j;
+	int	flag;
 
+	flag = 0;
 	i = 0;
 	while (piped[i])
 	{
 		j = 0;
 		while (piped[i][j])
 		{
-			if (piped[i][j] == '$')
+			if (piped[i][j] == '\'' && !(flag & DQUOTE))
+				flag ^= QUOTE;
+			if (piped[i][j] == '\"')
+				flag ^= DQUOTE;
+			if (piped[i][j] == '$' && !(flag & QUOTE))
 			{
 				if (!(piped = change_env_var(s, piped, i, j)))
 					exit(1);
