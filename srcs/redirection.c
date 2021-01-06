@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 01:49:09 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/07 00:14:43 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/07 00:46:19 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	execute_redirection(t_state *s, char *c, int *rd, int *wrt)
 	int	fd;
 	int	index;
 
+	fd = 0;
 	argv = s->curr_cmds->curr_tok->tokens;
 	if (c[0] == '<')
 	{
