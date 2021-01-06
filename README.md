@@ -30,4 +30,4 @@
 - [x]  pipe
 - [x]  semicolon(;)
 - [ ]  < > >> redirection
-- [ ]  PATH 파싱 후 binary file execute
+- [x]  PATH 파싱 후 binary file execute
