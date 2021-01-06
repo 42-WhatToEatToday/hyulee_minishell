@@ -6,7 +6,7 @@
 #    By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/21 14:46:02 by hyulee            #+#    #+#              #
-#    Updated: 2021/01/05 05:23:40 by kyoukim          ###   ########.fr        #
+#    Updated: 2021/01/07 00:24:23 by kyoukim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS =	./srcs/main.c \
 		./srcs/prompt.c \
 		./srcs/parse_line.c \
 		./srcs/parse_path.c \
+		./srcs/redirection.c \
 		./srcs/remove_quotes.c \
 		./srcs/split_utils.c \
 		./srcs/ft_echo.c \

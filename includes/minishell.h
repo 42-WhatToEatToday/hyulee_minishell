@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/06 22:49:14 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/07 00:25:10 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,9 @@ void	execute(t_state *s, char **envp);
 int		get_argv_num(t_cmd cmd);
 
 char	**parse_path(t_state *s);
+
+int		execute_redirection(t_state *s, char *c, int *rd, int *wrt);
+int		search_token(t_state *s, char *c);
 
 int		ft_echo(t_state *s, t_cmd cmd);
 int		ft_cd(t_state *s, t_cmd cmd);
