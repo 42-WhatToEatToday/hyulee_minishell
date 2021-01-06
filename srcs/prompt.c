@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/06 13:31:03 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/06 23:32:09 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	prompt(t_state *s, char **envp)
 	int		input_flag;
 	
 	input_flag = 0;
-	s->input = 0;
+//	s->input = 0;
 	while (1)
 	{
 		if (input_flag == 0)
@@ -92,12 +92,12 @@ void	prompt(t_state *s, char **envp)
 			write(1, ">", 1);
 		input_flag = 0;
 		gnl_ret = get_next_line(0, &input);
-	//	if (gnl_ret == 0 && handle_eof(s, &input, &input_flag))
-	//		continue;  // these 2 lines
-	//	append_input(s, &input);
-		s->input = input;
+		if (gnl_ret == 0 && handle_eof(s, &input, &input_flag))
+			continue;  // these 2 lines
+		append_input(s, &input);
 		parse_line(s, s->input);
 		execute(s, envp);
-		free(input);
+		free(s->input);
+		s->input = 0;
 	}
 }

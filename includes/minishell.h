@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/06 12:29:38 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/06 22:49:14 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	append_command(t_cmds **cmds, t_cmds *new);
 
 char	**split_delimiter(char *s, char c);
 
-void		execute_pipe(t_state *s, int read, int write, char **envp);
+void	execute_pipe(t_state *s, int read, int write, char **envp);
 int		execute_cmd(t_state *s, char **envp);
 void	execute(t_state *s, char **envp);
 
@@ -123,11 +123,12 @@ int		get_argv_num(t_cmd cmd);
 
 char	**parse_path(t_state *s);
 
-int	ft_echo(t_state *s, t_cmd cmd);
-int	ft_cd(t_state *s, t_cmd cmd);
-int	ft_pwd(t_state *s);
-int	ft_env(t_state *s);
-int	ft_export(t_state *s, t_cmd cmd);
-int	ft_unset(t_state *s, t_cmd cmd);
-int	ft_exit();
+int		ft_echo(t_state *s, t_cmd cmd);
+int		ft_cd(t_state *s, t_cmd cmd);
+int		ft_pwd(t_state *s);
+int		ft_env(t_state *s);
+int		ft_export(t_state *s, t_cmd cmd);
+int		ft_unset(t_state *s, t_cmd cmd);
+int		ft_exit();
+
 #endif
