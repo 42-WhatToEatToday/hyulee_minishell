@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 21:01:46 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/05 18:59:02 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/06 12:32:26 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ static int	is_valid_exitnum(char *num)
 	return (1);
 }	
 
-static int	exit_with_designated_exitnum(t_cmd cmd)
+static void	exit_with_designated_exitnum(t_cmd cmd)
 {
 	int	ret;
 
 	ret = 0;
-	if (ret = is_valid_exitnum(cmd.argv[1]))
+	if ((ret = is_valid_exitnum(cmd.argv[1])))
 	{
 		ft_printf("in");
 		ft_putstr_fd("sh: exit: ", 2);

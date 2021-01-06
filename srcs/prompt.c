@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/05 18:28:11 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/06 12:20:24 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	prompt(t_state *s, char **envp)
 		gnl_ret = get_next_line(0, &input);
 	//	if (gnl_ret == 0 && handle_eof(s, &input, &input_flag))
 	//		continue;  // these 2 lines
-		append_input(s, &input);
+	//	append_input(s, &input);
 		s->input = input;
 		parse_line(s, s->input);
 		execute(s, envp);
