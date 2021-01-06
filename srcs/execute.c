@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/06 12:29:24 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/06 23:55:56 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,18 @@ void	execute_pipe(t_state *s, int rd, int wrt, char **envp)
 	t_cmd	cmd;
 	pid_t	pid;
 	int	wstatus;
+	int	index;
 
 	init_cmd(&cmd, s);
+	if (search_token(s, "<"))
+		if (!execute_redirection(s, "<", &rd, &wrt))
+			return ;
+	if (search_token(s, ">"))
+		execute_redirection(s, ">", &rd, &wrt);
+	else if (search_token(s, ">>"))
+		execute_redirection(s, ">>", &rd, &wrt);
+	if ((index = search_token(s, ">")) || (index = search_token(s, ">>")))
+		cmd.argv[index] = NULL;
 	if (execute_builtin(s, cmd, rd, wrt))
 		return ;
 	if ((pid = fork()) < 0)
@@ -109,7 +119,7 @@ int	execute_cmd(t_state *s, char **envp)
 	{
 		if (pipe(pipefd) < 0)
 			exit(1);
-		if (tok_size == 0)
+		if (!tok_size && !search_token(s, ">") && !search_token(s, ">>"))
 			execute_pipe(s, rd, STDOUT_FILENO, envp);
 		else
 			execute_pipe(s, rd, pipefd[WRITE_END], envp);
