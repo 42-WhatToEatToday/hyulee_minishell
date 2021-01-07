@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 21:01:46 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/07 17:50:33 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/08 01:26:51 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int	ft_exit(t_state *s, t_cmd cmd)
 		exit_with_designated_exitnum(cmd);
 	else
 	{
-		s->exitnum = 1;
 		ft_putstr_fd("sh: exit: too many arguments\n", 2);
+		s->exitnum = 1;
 	}
 	return (1);
 }

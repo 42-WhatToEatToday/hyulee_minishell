@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 07:00:32 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/06 23:41:20 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/08 01:31:12 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,17 @@ int			ft_export(t_state *s, t_cmd cmd)
 		seperate_key_value(cmd.argv[i], &key, &value);
 		if (!is_valid_identifier(key[0]))
 		{
+			//ft_putstr_fd("sh: export: \'", 2);
+			//ft_putstr_fd(&key[0], 2);
+			//ft_putstr_fd("\': not a valid identifier\n", 2);
 			ft_printf("bash: export: \'%c\': not a valid identifier\n", key[0]);
+			s->exitnum = 1;
 			break ;
 		}
 		change_env(&(s->env_head), key, value);
 		frees(key, value, 0);
 		i++;
 	}
+	s->exitnum = 0;
 	return (1);
 }
