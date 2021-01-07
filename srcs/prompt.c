@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/08 00:09:59 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/08 00:11:40 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	for_test(t_cmds *cmds)
 	}
 }
 
-void	prompt(t_state *s, char **envp)
+void		prompt(t_state *s, char **envp)
 {
 	char	*input;
 	int		gnl_ret;
