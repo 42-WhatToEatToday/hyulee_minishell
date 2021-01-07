@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/07 02:26:17 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/07 18:08:59 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,15 @@ void	execute_pipe(t_state *s, int rd, int wrt, char **envp)
 	t_cmd	cmd;
 	pid_t	pid;
 	int	wstatus;
-	int	index;
 
-	init_cmd(&cmd, s);
+	if (search_token(s, ">"))
+		execute_redirection(s, ">", &rd, &wrt);
+	if (search_token(s, ">>"))
+		execute_redirection(s, ">>", &rd, &wrt);
 	if (search_token(s, "<"))
 		if (!execute_redirection(s, "<", &rd, &wrt))
 			return ;
-	if (search_token(s, ">"))
-		execute_redirection(s, ">", &rd, &wrt);
-	else if (search_token(s, ">>"))
-		execute_redirection(s, ">>", &rd, &wrt);
-	if ((index = search_token(s, ">")) || (index = search_token(s, ">>")))
-		cmd.argv[index] = NULL;
+	init_cmd(&cmd, s);
 	if (execute_builtin(s, cmd, rd, wrt))
 		return ;
 	check_path(s, &cmd);

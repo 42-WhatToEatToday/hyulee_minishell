@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 01:49:09 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/07 00:46:19 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/07 18:06:09 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	execute_redirection(t_state *s, char *c, int *rd, int *wrt)
 			fd = open(argv[index + 1], O_CREAT|O_TRUNC|O_WRONLY, 0644);
 		}
 		*wrt = fd;
+		argv[index] = NULL;
 	}
 	return (1);
 }
