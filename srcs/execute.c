@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/07 18:08:59 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/07 23:06:09 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	execute_pipe(t_state *s, int rd, int wrt, char **envp)
 			dup2(wrt, STDOUT_FILENO);
 		if (execve(cmd.command, cmd.argv, envp) < 0)
 			execute_error(cmd);
+		frees(cmd.command, 0, 0);
 	}
 	else
 	{
