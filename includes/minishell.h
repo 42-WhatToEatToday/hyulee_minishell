@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/07 02:20:59 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/07 23:58:30 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 
 # define QUOTE				(1 << 0)
 # define DQUOTE				(1 << 1)
+# define TOKENIZE			(1 << 2)
+# define REDI_IN			(1 << 3)
+# define REDI_OUT			(1 << 4)
 
 # define MAX_PATH_LENGTH	1000
 # define MAX_STR			1000
@@ -115,6 +118,7 @@ t_cmds	*create_command(t_tok *data);
 void	append_command(t_cmds **cmds, t_cmds *new);
 
 char	**split_delimiter(char *s, char c);
+int		put_words_in_ret(char **ret, char *s, char c, int flag);
 
 void	execute_pipe(t_state *s, int read, int write, char **envp);
 int		execute_cmd(t_state *s, char **envp);

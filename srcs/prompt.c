@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/08 00:06:03 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/08 00:09:59 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,29 @@ static int	check_escape_end(t_state *s, char **input, int *input_flag)
 	return (0);
 }
 
-void		prompt(t_state *s, char **envp)
+void	for_test(t_cmds *cmds)
+{
+	while (cmds)
+	{
+		ft_printf("----------------command--------------------\n");
+		int i = 0;
+		while (cmds->tokens)
+		{
+			ft_printf("---Piped %d---\n", i);
+			int j = 0;
+			while (cmds->tokens->tokens[j])
+			{
+				ft_printf("%s$\n", cmds->tokens->tokens[j]);
+				++j;
+			}
+			cmds->tokens = cmds->tokens->next;
+			++i;
+		}
+		cmds = cmds->next;
+	}
+}
+
+void	prompt(t_state *s, char **envp)
 {
 	char	*input;
 	int		gnl_ret;
@@ -90,6 +112,7 @@ void		prompt(t_state *s, char **envp)
 			continue;
 		append_input(s, &input);
 		parse_line(s, s->input);
+		//for_test(s->cmds);
 		execute(s, envp);
 		frees(s->input, 0, 0);
 		s->input = 0;
