@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/07 02:20:33 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/08 00:06:03 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern	t_state *g_state;
 
-void	append_input(t_state *s, char **input)
+void		append_input(t_state *s, char **input)
 {
 	char	*temp;
 	
@@ -27,7 +27,7 @@ void	append_input(t_state *s, char **input)
 	s->input = temp;
 }
 
-int		handle_eof(t_state *s, char **input, int *input_flag)
+int			handle_eof(t_state *s, char **input, int *input_flag)
 {
 	*input_flag = 2;
 	if (ft_strlen(*input) == 0 && ft_strlen(s->input) == 0)
@@ -43,40 +43,33 @@ int		handle_eof(t_state *s, char **input, int *input_flag)
 	return (1);
 }
 
-int	is_quote_error(t_cmds *cmds)
+static int	check_escape_end(t_state *s, char **input, int *input_flag)
 {
-	t_tok	*tok;
+	int		i;
+	char	*temp;
 
-	tok = cmds->tokens;
-	while (tok)
+	i = 0;
+	if ((*input)[i] == '\\')
 	{
-		if (tok->flag != 0)
-			return (1);
-		tok = tok->next;
+		*input_flag = 1;
+		frees(*input, 0, 0);
+		return (1);
+	}
+	else
+		i = ft_strlen(*input) - 1;
+	if (i >= 0 && (*input)[i] == '\\')
+	{
+		*input_flag = 1;
+		if (i > 0)
+			temp = ft_strndup(*input, i);
+		append_input(s, &temp);
+		frees(*input, 0, 0);
+		return (1);
 	}
 	return (0);
 }
 
-
-void	execute(t_state *s, char **envp)
-{
-	s->curr_cmds = s->cmds;
-	while (s->curr_cmds)
-	{
-		if (is_quote_error(s->curr_cmds))
-		{
-			ft_printf("ERROR: multi-line disabled.\n");
-			s->exitnum = 1;
-			s->curr_cmds = s->curr_cmds->next;
-			continue;
-		}
-		execute_cmd(s, envp);
-		s->curr_cmds = s->curr_cmds->next;
-	}
-	free_command(&(s->cmds));
-}
-
-void	prompt(t_state *s, char **envp)
+void		prompt(t_state *s, char **envp)
 {
 	char	*input;
 	int		gnl_ret;
@@ -92,6 +85,8 @@ void	prompt(t_state *s, char **envp)
 		input_flag = 0;
 		gnl_ret = get_next_line(0, &input);
 		if (gnl_ret == 0 && handle_eof(s, &input, &input_flag))
+			continue;
+		if (check_escape_end(s, &input, &input_flag))
 			continue;
 		append_input(s, &input);
 		parse_line(s, s->input);

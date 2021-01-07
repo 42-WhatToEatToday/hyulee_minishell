@@ -6,7 +6,7 @@
 #    By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/21 14:46:02 by hyulee            #+#    #+#              #
-#    Updated: 2021/01/07 00:24:23 by kyoukim          ###   ########.fr        #
+#    Updated: 2021/01/08 00:04:37 by hyulee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS =	./srcs/main.c \
 		./srcs/env_utils2.c \
 		./srcs/envp.c \
 		./srcs/execute.c \
+		./srcs/execute_utils.c \
 		./srcs/handle_env_var.c \
 		./srcs/signal.c \
 		./srcs/prompt.c \
