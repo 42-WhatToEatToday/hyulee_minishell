@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 06:11:45 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/05 05:13:49 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/08 01:25:47 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int	ft_env(t_state *s)
 		envp++;
 	}
 	free_array(envp_head);
+	s->exitnum = 0;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:16:16 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/05 19:02:03 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/08 01:25:32 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ int	ft_echo(t_state *s, t_cmd cmd)
 	}
 	if (cmd.argv_num == 1)
 		ft_printf("\n");
+	s->exitnum = 0;
 	return (1);
 }
