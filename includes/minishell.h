@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/07 23:58:30 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 03:14:42 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <errno.h>
+# include <dirent.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <sys/types.h>

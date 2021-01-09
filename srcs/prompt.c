@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 01:37:36 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/10 03:32:23 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,19 @@ void		for_test(t_cmds *cmds)
 	}
 }
 
+static void		check_dir(t_state *s)
+{
+	DIR	*dir;
+	dir = opendir(s->input);
+	if (dir == NULL)
+	{
+//		ft_printf("sh: %s: no such file or directory\n", s->input);
+		return ;
+	}
+//	ft_printf("sh: %s: is a directory\n", s->input);
+	(void)closedir(dir);
+}
+
 void		prompt(t_state *s, char **envp)
 {
 	char	*input;
@@ -113,6 +126,7 @@ void		prompt(t_state *s, char **envp)
 		append_input(s, &input);
 		parse_line(s, s->input);
 		//for_test(s->cmds);
+		check_dir(s);
 		execute(s, envp);
 		frees(s->input, 0, 0);
 		s->input = 0;
