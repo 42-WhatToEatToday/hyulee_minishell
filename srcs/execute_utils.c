@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/07 23:06:09 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/10 01:35:25 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,12 @@ static void	execute_error(t_cmd cmd)
 		exit(127);
 	exit(1);
 }
-void	execute_pipe(t_state *s, int rd, int wrt, char **envp)
+
+void		execute_pipe(t_state *s, int rd, int wrt, char **envp)
 {
 	t_cmd	cmd;
 	pid_t	pid;
-	int	wstatus;
+	int		wstatus;
 
 	if (search_token(s, ">"))
 		execute_redirection(s, ">", &rd, &wrt);
@@ -107,7 +108,7 @@ void	execute_pipe(t_state *s, int rd, int wrt, char **envp)
 	}
 }
 
-int	execute_cmd(t_state *s, char **envp)
+int			execute_cmd(t_state *s, char **envp)
 {
 	int	tok_size;
 	int	rd;

@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 05:28:47 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/08 01:15:42 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 01:58:25 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static char	**change_env_var(t_state *s, char **piped, int i, int j)
 	return (piped);
 }
 
-char	**handle_env_var(t_state *s, char **piped)
+char		**handle_env_var(t_state *s, char **piped)
 {
 	int	i;
 	int	j;

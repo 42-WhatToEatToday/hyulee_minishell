@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 13:31:14 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/07 23:59:48 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 01:45:13 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	handle_redirection_in_split(char *s, int i, int *j, int *flag)
 
 static int	get_moved_index(char *s, int i, char c, int *flag)
 {
-	int		j;
+	int	j;
 
 	j = i;
 	while (((*flag & QUOTE || *flag & DQUOTE)
@@ -68,12 +68,12 @@ static int	get_moved_index(char *s, int i, char c, int *flag)
 		if (!(*flag & QUOTE) && !(*flag & DQUOTE)
 		&& *flag & TOKENIZE && (s[j] == '<' || s[j] == '>'))
 			if (!handle_redirection_in_split(s, i, &j, flag))
-				break;
+				break ;
 		++j;
 	}
 	return (j);
 }
-	
+
 static void	toggle_redirection_flags(char *s, int *i, int *flag)
 {
 	if (*flag & TOKENIZE && (s[*i] == '<' || *flag & REDI_IN))
@@ -84,11 +84,11 @@ static void	toggle_redirection_flags(char *s, int *i, int *flag)
 		(*i)++;
 }
 
-int	put_words_in_ret(char **ret, char *s, char c, int flag)
+int			put_words_in_ret(char **ret, char *s, char c, int flag)
 {
-	int		i;
-	int		j;
-	int		k;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	j = 0;

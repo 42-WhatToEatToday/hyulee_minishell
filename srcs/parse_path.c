@@ -6,42 +6,42 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:43:54 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/07 23:09:34 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/10 01:59:38 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern	t_state	*g_state;
+extern		t_state	*g_state;
 
 static void	bind_path(char *dir, char *path, char *input, int size)
 {
-		dir[0] = '\0';
-		ft_strlcat(dir, path, size);
-		ft_strlcat(dir, "/", size);
-		ft_strlcat(dir, input, size);
+	dir[0] = '\0';
+	ft_strlcat(dir, path, size);
+	ft_strlcat(dir, "/", size);
+	ft_strlcat(dir, input, size);
 }
 
-int		check_path(t_state *s, t_cmd *cmd)
+int			check_path(t_state *s, t_cmd *cmd)
 {
-	char	**path;
-	char	*dir;
-	int		i;
-	size_t	size;
+	char		**path;
+	char		*dir;
+	int			i;
+	size_t		size;
 	struct stat	sb;
 
 	i = -1;
 	path = parse_path(s);
 	while (path[++i])
 	{
-		size = ft_strlen(path[i]) + ft_strlen("/") + ft_strlen(cmd->command) + 1;
-		if (!(dir = (char *)malloc(sizeof(char) * (size))))
+		size = ft_strlen(path[i]) + ft_strlen("/") + ft_strlen(cmd->command);
+		if (!(dir = (char *)malloc(sizeof(char) * (size + 1))))
 			exit(0);
-		bind_path(dir, path[i], cmd->command, size);
+		bind_path(dir, path[i], cmd->command, size + 1);
 		if (stat(dir, &sb) == 0)
 		{
 			cmd->command = dir;
-			break;
+			break ;
 		}
 		frees(dir, 0, 0);
 	}
@@ -49,7 +49,7 @@ int		check_path(t_state *s, t_cmd *cmd)
 	return (0);
 }
 
-char	**parse_path(t_state *s)
+char		**parse_path(t_state *s)
 {
 	char	*path;
 	char	**ret;

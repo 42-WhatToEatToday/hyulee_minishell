@@ -6,18 +6,18 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/08 00:11:40 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/10 01:37:36 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern	t_state *g_state;
+extern		t_state *g_state;
 
 void		append_input(t_state *s, char **input)
 {
 	char	*temp;
-	
+
 	if (!(temp = ft_strjoin(s->input, *input)))
 	{
 		ft_printf("%s\n", temp);
@@ -69,7 +69,7 @@ static int	check_escape_end(t_state *s, char **input, int *input_flag)
 	return (0);
 }
 
-void	for_test(t_cmds *cmds)
+void		for_test(t_cmds *cmds)
 {
 	while (cmds)
 	{
@@ -96,7 +96,7 @@ void		prompt(t_state *s, char **envp)
 	char	*input;
 	int		gnl_ret;
 	int		input_flag;
-	
+
 	input_flag = 0;
 	while (1)
 	{

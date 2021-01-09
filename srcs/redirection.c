@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 01:49:09 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/07 22:47:10 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/10 01:36:23 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	print_no_file_error(t_state *s, char *arg)
 int	execute_redirection(t_state *s, char *c, int *rd, int *wrt)
 {
 	char	**argv;
-	int	fd;
-	int	index;
+	int		fd;
+	int		index;
 
 	fd = 0;
 	index = 0;
@@ -43,12 +43,12 @@ int	execute_redirection(t_state *s, char *c, int *rd, int *wrt)
 		if (c[1] == '>' && c[2] == '\0')
 		{
 			index = search_token(s, ">>");
-			fd = open(argv[index + 1], O_CREAT|O_APPEND|O_WRONLY, 0644);
+			fd = open(argv[index + 1], O_CREAT | O_APPEND | O_WRONLY, 0644);
 		}
 		else if (c[1] == '\0')
 		{
 			index = search_token(s, ">");
-			fd = open(argv[index + 1], O_CREAT|O_TRUNC|O_WRONLY, 0644);
+			fd = open(argv[index + 1], O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		}
 		*wrt = fd;
 		argv[index] = NULL;

@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:40:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/07 00:41:20 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 01:39:20 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_state	*g_state;
 
-static void init(t_state *s)
+static void	init(t_state *s)
 {
 	s->env_head = 0;
 	s->input = 0;
@@ -41,7 +41,7 @@ static int	parse_env(t_env **head, char *envp[])
 			{
 				key = ft_strndup(envp[i], j);
 				value = ft_strdup(&envp[i][j + 1]);
-				break;
+				break ;
 			}
 			j++;
 		}
@@ -51,7 +51,7 @@ static int	parse_env(t_env **head, char *envp[])
 	return (1);
 }
 
-int			main(int argc, char *argv[], char *envp[]) 
+int			main(int argc, char *argv[], char *envp[])
 {
 	t_state state;
 	char	**envp_head;
@@ -66,5 +66,5 @@ int			main(int argc, char *argv[], char *envp[])
 	envp_head = get_envp(&(state.env_head));
 	prompt(&state, envp_head);
 	free_array(envp_head);
-	return (0);	
+	return (0);
 }

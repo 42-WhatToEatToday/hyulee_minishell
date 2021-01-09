@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 21:01:46 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/08 01:26:51 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 01:40:59 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static int	is_valid_exitnum(char *num)
 		++i;
 	if (!num[i])
 	{
-		if (ft_atoi(num) == -1 && (num[s] != '-' || 
+		if (ft_atoi(num) == -1 && (num[s] != '-' ||
 			(num[s + 1] != '1' || is_num(num[s + 2]))))
 			return (2);
 		return (0);
 	}
 	return (1);
-}	
+}
 
 static void	exit_with_designated_exitnum(t_cmd cmd)
 {
@@ -67,8 +67,7 @@ static void	exit_with_designated_exitnum(t_cmd cmd)
 		exit(ft_atoi(cmd.argv[1]));
 }
 
-
-int	ft_exit(t_state *s, t_cmd cmd)
+int			ft_exit(t_state *s, t_cmd cmd)
 {
 	ft_putstr_fd("exit\n", 2);
 	if (cmd.argv_num == 1)

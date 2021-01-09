@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 00:19:55 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/07 02:16:57 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 01:49:01 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	copy_until_quotation_mark(t_tok *tok, char **new_token, char *tokens
 		**new_token = tokens[(*j)++];
 		(*new_token)++;
 		if (tokens[(*j)] == '\'' || tokens[(*j)] == '\"')
-			break;
+			break ;
 	}
 }
 
@@ -45,7 +45,7 @@ static void	copy_until_quote_ends(t_tok *tok, char **new_token, char *tokens, in
 		{
 			tok->flag ^= QUOTE;
 			++(*j);
-			break;
+			break ;
 		}
 		**new_token = tokens[(*j)++];
 		(*new_token)++;
@@ -56,7 +56,7 @@ static void	copy_until_quote_ends(t_tok *tok, char **new_token, char *tokens, in
 		{
 			tok->flag ^= DQUOTE;
 			++(*j);
-			break;
+			break ;
 		}
 		**new_token = tokens[(*j)++];
 		(*new_token)++;
@@ -77,11 +77,11 @@ static void	create_new_token(t_tok *tok, char *tokens, char *new_token)
 	*new_token = 0;
 }
 
-void	remove_quotes(t_tok *tok, char **tokens)
+void		remove_quotes(t_tok *tok, char **tokens)
 {
 	int		i;
-	char		new_token[MAX_STR];
-	
+	char	new_token[MAX_STR];
+
 	i = 1;
 	while (tokens[i])
 	{
