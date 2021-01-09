@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 18:34:48 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/07 21:25:16 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 02:49:14 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,23 @@
 
 extern	t_state *g_state;
 
-void	parse_line(t_state *s, char *input)
+static void	check_tilde(t_state *s)
+{
+	char	**token;
+
+	token = s->cmds->tokens->tokens;
+	while (*token)
+	{
+		if (ft_strcmp(*token, "~") == 0)
+		{
+			frees(*token, 0, 0);
+			*token = ft_strdup(find_env(&(s->env_head), "HOME")->value);
+		}
+		token++;
+	}
+}
+
+void		parse_line(t_state *s, char *input)
 {
 	char	**cmds;
 	char	**piped;
@@ -35,6 +51,7 @@ void	parse_line(t_state *s, char *input)
 		if (!(tokenize(cmds_curr, piped)))
 			exit(1);
 		append_command(&(s->cmds), cmds_curr);
+		check_tilde(s);
 		free_array(piped);
 		i++;
 	}
