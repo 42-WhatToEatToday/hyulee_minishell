@@ -6,13 +6,13 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 00:04:14 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 18:16:04 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 19:57:17 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		is_quote_error(t_cmds *cmds)
+static int	is_quote_error(t_cmds *cmds)
 {
 	t_tok	*tok;
 

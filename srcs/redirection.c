@@ -6,13 +6,13 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 01:49:09 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/10 18:38:06 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 19:58:51 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	print_no_file_error(t_state *s, char *arg)
+static int	print_no_file_error(t_state *s, char *arg)
 {
 	ft_putstr_fd("sh: ", 2);
 	ft_putstr_fd(arg, 2);
@@ -21,7 +21,7 @@ int	print_no_file_error(t_state *s, char *arg)
 	return (0);
 }
 
-int	execute_redirection(t_state *s, char *c, int i)
+static int	set_fd(t_state *s, char *c, int i)
 {
 	char	**argv;
 	int		fd;
@@ -45,9 +45,28 @@ int	execute_redirection(t_state *s, char *c, int i)
 	return (1);
 }
 
-int	search_token(t_state *s, char *c, int *i)
+int			search_token(t_state *s, char *c, int *i)
 {
 	if (!ft_strcmp(s->curr_cmds->curr_tok->tokens[*i], c))
 		return (*i);
 	return (0);
+}
+
+int			set_redirection(t_state *s)
+{
+	int		i;
+
+	i = 0;
+	while (s->curr_cmds->curr_tok->tokens[i])
+	{
+		if (search_token(s, ">", &i))
+			set_fd(s, ">", i);
+		if (search_token(s, ">>", &i))
+			set_fd(s, ">>", i);
+		if (search_token(s, "<", &i))
+			if (!set_fd(s, "<", i))
+				return (0);
+		++i;
+	}
+	return (1);
 }
