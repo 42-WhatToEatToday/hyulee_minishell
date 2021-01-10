@@ -6,15 +6,15 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 20:50:37 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 01:50:16 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern			t_state *g_state;
+extern		t_state *g_state;
 
-void			append_input(t_state *s, char **input)
+void		append_input(t_state *s, char **input)
 {
 	char	*temp;
 
@@ -27,7 +27,7 @@ void			append_input(t_state *s, char **input)
 	s->input = temp;
 }
 
-int				handle_eof(t_state *s, char **input, int *input_flag)
+int			handle_eof(t_state *s, char **input, int *input_flag)
 {
 	*input_flag = 2;
 	if (ft_strlen(*input) == 0 && ft_strlen(s->input) == 0)
@@ -43,7 +43,7 @@ int				handle_eof(t_state *s, char **input, int *input_flag)
 	return (1);
 }
 
-static int		check_escape_end(t_state *s, char **input, int *input_flag)
+static int	check_escape_end(t_state *s, char **input, int *input_flag)
 {
 	int		i;
 	char	*temp;
@@ -69,9 +69,10 @@ static int		check_escape_end(t_state *s, char **input, int *input_flag)
 	return (0);
 }
 
-static void		check_dir(t_state *s)
+static void	check_dir(t_state *s)
 {
 	DIR	*dir;
+
 	dir = opendir(s->input);
 	if (dir == NULL)
 	{
@@ -82,7 +83,7 @@ static void		check_dir(t_state *s)
 	(void)closedir(dir);
 }
 
-void			prompt(t_state *s, char **envp)
+void		prompt(t_state *s, char **envp)
 {
 	char	*input;
 	int		gnl_ret;

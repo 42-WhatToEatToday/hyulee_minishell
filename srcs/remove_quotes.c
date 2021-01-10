@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 00:19:55 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/10 20:53:32 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 01:53:14 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ static void	create_new_token(t_tok *tok, char *tokens, char *new_token)
 	while (tokens[j])
 	{
 		toggle_flag(tok, tokens[j], &j);
-		copy_until_qstart(tok, &new_token, tokens, &j);
-		copy_until_qend(tok, &new_token, tokens, &j);
+		copy_til_qstart(tok, &new_token, tokens, &j);
+		copy_til_qend(tok, &new_token, tokens, &j);
 	}
 	*new_token = 0;
 }
