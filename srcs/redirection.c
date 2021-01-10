@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 01:49:09 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/10 19:58:51 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 20:51:07 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static int	set_fd(t_state *s, char *c, int i)
 	else if (c[0] == '>')
 	{
 		if (c[1] == '>' && c[2] == '\0')
-			fd = open(argv[i + 1], O_CREAT|O_APPEND|O_WRONLY, 0644);
+			fd = open(argv[i + 1], O_CREAT | O_APPEND | O_WRONLY, 0644);
 		else if (c[1] == '\0')
-			fd = open(argv[i + 1], O_CREAT|O_TRUNC|O_WRONLY, 0644);
+			fd = open(argv[i + 1], O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		s->wrt_fd = fd;
 	}
 	return (1);

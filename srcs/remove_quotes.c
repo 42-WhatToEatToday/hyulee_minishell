@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 00:19:55 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/10 19:15:56 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 20:53:32 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	toggle_flag(t_tok *tok, char c, int *j)
 	}
 }
 
-static void	copy_until_quotation_mark(t_tok *tok, char **new_token, char *tokens, int *j)
+static void	copy_til_qstart(t_tok *tok, char **new_token, char *tokens, int *j)
 {
 	while (!(tok->flag & QUOTE) && !(tok->flag & DQUOTE) && tokens[(*j)])
 	{
@@ -37,7 +37,7 @@ static void	copy_until_quotation_mark(t_tok *tok, char **new_token, char *tokens
 	}
 }
 
-static void	copy_until_quote_ends(t_tok *tok, char **new_token, char *tokens, int *j)
+static void	copy_til_qend(t_tok *tok, char **new_token, char *tokens, int *j)
 {
 	while (tok->flag & QUOTE && tokens[(*j)])
 	{
@@ -71,8 +71,8 @@ static void	create_new_token(t_tok *tok, char *tokens, char *new_token)
 	while (tokens[j])
 	{
 		toggle_flag(tok, tokens[j], &j);
-		copy_until_quotation_mark(tok, &new_token, tokens, &j);
-		copy_until_quote_ends(tok, &new_token, tokens, &j);
+		copy_until_qstart(tok, &new_token, tokens, &j);
+		copy_until_qend(tok, &new_token, tokens, &j);
 	}
 	*new_token = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 19:48:20 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/10 19:58:32 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 20:51:56 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void		init_cmd(t_cmd *cmd, t_state *s)
 	i = 0;
 	while (s->curr_cmds->curr_tok->tokens[i])
 	{
-		if (search_token(s, ">", &i) || search_token(s, ">>", &i) 
+		if (search_token(s, ">", &i) || search_token(s, ">>", &i)
 				|| search_token(s, "<", &i))
 		{
 			free_after_index(s->curr_cmds->curr_tok->tokens, i);
 			s->curr_cmds->curr_tok->tokens[i] = NULL;
-			break;
+			break ;
 		}
 		++i;
 	}

@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 00:04:14 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 19:57:17 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 20:46:37 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	is_quote_error(t_cmds *cmds)
 	return (0);
 }
 
-void	execute(t_state *s, char **envp)
+void		execute(t_state *s, char **envp)
 {
 	s->curr_cmds = s->cmds;
 	while (s->curr_cmds)
