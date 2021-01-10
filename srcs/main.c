@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:40:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 01:39:20 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/10 18:35:19 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	init(t_state *s)
 	s->curr_cmds = 0;
 	s->waiting = 0;
 	s->exitnum = 0;
+	s->rd_fd = 0;
+	s->wrt_fd = 1;
 }
 
 static int	parse_env(t_env **head, char *envp[])
