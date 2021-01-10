@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 16:15:00 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 19:57:32 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 02:44:09 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void	change_env(t_env **head, char *key, char *value)
 		add_list_back(head, key, value);
 	else if (temp->value == NULL)
 		temp->value = ft_strdup(value);
+	else if (value == NULL)
+		return ;
+	else if (ft_strcmp(key, "_") == 0)
+		return ;
 	else
 	{
 		frees(temp->value, 0, 0);

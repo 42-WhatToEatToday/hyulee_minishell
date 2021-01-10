@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 07:00:32 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 01:55:39 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/11 02:44:56 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern t_state *g_state;
 
 static int	is_valid_identifier(char c)
 {
-	return ((65 <= c && c <= 90) || c == '_');
+	return ((65 <= c && c <= 90) || (97 <= c && c <= 122) || c == '_');
 }
 
 int			get_argv_num(t_cmd cmd)
@@ -54,12 +54,11 @@ int			ft_export(t_state *s, t_cmd cmd)
 	while (cmd.argv[i])
 	{
 		seperate_key_value(cmd.argv[i], &key, &value);
-		if (!is_valid_identifier(key[0]))
+		if (!(is_valid_identifier(key[0])))
 		{
-			//ft_putstr_fd("sh: export: \'", 2);
-			//ft_putstr_fd(&key[0], 2);
-			//ft_putstr_fd("\': not a valid identifier\n", 2);
-			ft_printf("sh: export: \'%c\': not a valid identifier\n", key[0]);
+			ft_putstr_fd("sh: export: \'", 2);
+			ft_putstr_fd(&key[0], 2);
+			ft_putstr_fd("\': not a valid identifier\n", 2);
 			s->exitnum = 1;
 			break ;
 		}

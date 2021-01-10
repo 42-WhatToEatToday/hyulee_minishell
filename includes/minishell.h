@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 21:03:30 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 01:46:12 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,4 +176,5 @@ void				free_array(char **arrs);
 void				free_command(t_cmds **cmds);
 void				free_tok(t_tok **tok);
 void				free_exit(t_state *s, int exitnum);
+
 #endif
