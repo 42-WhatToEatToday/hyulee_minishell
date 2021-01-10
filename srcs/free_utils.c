@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 16:26:07 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 18:26:47 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/10 18:40:26 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_array(char **arrs)
 {
 	int	i;
 
-	if (arrs)
+	if (!arrs)
 		return ;
 	i = 0;
 	while (arrs[i])
