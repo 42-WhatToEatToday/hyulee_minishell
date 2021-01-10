@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 03:32:23 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/10 17:36:14 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,28 +69,6 @@ static int	check_escape_end(t_state *s, char **input, int *input_flag)
 	return (0);
 }
 
-void		for_test(t_cmds *cmds)
-{
-	while (cmds)
-	{
-		ft_printf("----------------command--------------------\n");
-		int i = 0;
-		while (cmds->tokens)
-		{
-			ft_printf("---Piped %d---\n", i);
-			int j = 0;
-			while (cmds->tokens->tokens[j])
-			{
-				ft_printf("%s$\n", cmds->tokens->tokens[j]);
-				++j;
-			}
-			cmds->tokens = cmds->tokens->next;
-			++i;
-		}
-		cmds = cmds->next;
-	}
-}
-
 static void		check_dir(t_state *s)
 {
 	DIR	*dir;
@@ -125,7 +103,6 @@ void		prompt(t_state *s, char **envp)
 			continue;
 		append_input(s, &input);
 		parse_line(s, s->input);
-		//for_test(s->cmds);
 		check_dir(s);
 		execute(s, envp);
 		frees(s->input, 0, 0);

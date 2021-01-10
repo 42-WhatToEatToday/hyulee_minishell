@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 01:49:09 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/10 01:36:23 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/10 18:05:26 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,51 +21,33 @@ int	print_no_file_error(t_state *s, char *arg)
 	return (0);
 }
 
-int	execute_redirection(t_state *s, char *c, int *rd, int *wrt)
+int	execute_redirection(t_state *s, char *c, int i)
 {
 	char	**argv;
 	int		fd;
-	int		index;
 
 	fd = 0;
-	index = 0;
 	argv = s->curr_cmds->curr_tok->tokens;
 	if (c[0] == '<')
 	{
-		index = search_token(s, "<");
-		if ((fd = open(argv[index + 1], O_RDONLY)) == -1)
-			return (print_no_file_error(s, argv[index + 1]));
-		*rd = fd;
-		argv[index] = NULL;
+		if ((fd = open(argv[i + 1], O_RDONLY)) == -1)
+			return (print_no_file_error(s, argv[i + 1]));
+		s->rd_fd = fd;
 	}
 	else if (c[0] == '>')
 	{
 		if (c[1] == '>' && c[2] == '\0')
-		{
-			index = search_token(s, ">>");
-			fd = open(argv[index + 1], O_CREAT | O_APPEND | O_WRONLY, 0644);
-		}
+			fd = open(argv[i + 1], O_CREAT|O_APPEND|O_WRONLY, 0644);
 		else if (c[1] == '\0')
-		{
-			index = search_token(s, ">");
-			fd = open(argv[index + 1], O_CREAT | O_TRUNC | O_WRONLY, 0644);
-		}
-		*wrt = fd;
-		argv[index] = NULL;
+			fd = open(argv[i + 1], O_CREAT|O_TRUNC|O_WRONLY, 0644);
+		s->wrt_fd = fd;
 	}
 	return (1);
 }
 
-int	search_token(t_state *s, char *c)
+int	search_token(t_state *s, char *c, int *i)
 {
-	int	i;
-
-	i = 0;
-	while (s->curr_cmds->curr_tok->tokens[i])
-	{
-		if (!ft_strcmp(s->curr_cmds->curr_tok->tokens[i], c))
-			return (i);
-		++i;
-	}
+	if (!ft_strcmp(s->curr_cmds->curr_tok->tokens[*i], c))
+		return (*i);
 	return (0);
 }

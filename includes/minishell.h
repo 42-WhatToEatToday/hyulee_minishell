@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 03:14:42 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/10 18:09:09 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct		s_state
 	char			*input;
 	int				waiting;
 	int				exitnum;
+	int				rd_fd;
+	int				wrt_fd;
 	int				flag;
 }					t_state;
 
@@ -121,7 +123,7 @@ void	append_command(t_cmds **cmds, t_cmds *new);
 char	**split_delimiter(char *s, char c);
 int		put_words_in_ret(char **ret, char *s, char c, int flag);
 
-void	execute_pipe(t_state *s, int read, int write, char **envp);
+void	execute_pipe(t_state *s, int wrt, char **envp);
 int		execute_cmd(t_state *s, char **envp);
 void	execute(t_state *s, char **envp);
 
@@ -130,8 +132,8 @@ int		get_argv_num(t_cmd cmd);
 char	**parse_path(t_state *s);
 int		check_path(t_state *s, t_cmd *cmd);
 
-int		execute_redirection(t_state *s, char *c, int *rd, int *wrt);
-int		search_token(t_state *s, char *c);
+int		execute_redirection(t_state *s, char *c, int i);
+int		search_token(t_state *s, char *c, int *i);
 
 int		ft_echo(t_state *s, t_cmd cmd);
 int		ft_cd(t_state *s, t_cmd cmd);
