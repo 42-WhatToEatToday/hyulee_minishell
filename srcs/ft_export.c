@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 07:00:32 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 02:44:56 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/11 15:46:30 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			ft_export(t_state *s, t_cmd cmd)
 			ft_putstr_fd(&key[0], 2);
 			ft_putstr_fd("\': not a valid identifier\n", 2);
 			s->exitnum = 1;
-			break ;
+			return (1);
 		}
 		change_env(&(s->env_head), key, value);
 		frees(key, value, 0);

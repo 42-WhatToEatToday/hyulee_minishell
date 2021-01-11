@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 22:24:36 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 12:53:12 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 15:45:29 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	ft_cd(t_state *s, t_cmd cmd)
 		ft_putstr_fd(cmd.argv[1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 		s->exitnum = 1;
+		return (1);
 	}
 	getcwd(buf, MAX_PATH_LENGTH);
 	change_env(&(s->env_head), "PWD", buf);

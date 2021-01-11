@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/11 13:19:27 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 15:42:43 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	run_child_process(t_state *s, t_cmd cmd, char **envp)
 		dup2(s->wrt_fd, STDOUT_FILENO);
 	if (execve(cmd.command, cmd.argv, envp) < 0)
 		execute_error(cmd);
-	frees(cmd.command, 0, 0);
 }
 
 static void	init_cmd(t_cmd *cmd, t_state *s)
@@ -75,14 +74,13 @@ static void	execute_pipe(t_state *s, int wrt, char **envp)
 		exit(1);
 	if (pid == 0)
 		run_child_process(s, cmd, envp);
-	else
-	{
-		s->waiting = 1;
-		wait(&wstatus);
-		s->waiting = 0;
-		if (WIFEXITED(wstatus))
-			s->exitnum = WEXITSTATUS(wstatus);
-	}
+	if (ft_strcmp(cmd.command, s->curr_cmds->curr_tok->tokens[0]))
+		frees(cmd.command, 0, 0);
+	s->waiting = 1;
+	wait(&wstatus);
+	s->waiting = 0;
+	if (WIFEXITED(wstatus))
+		s->exitnum = WEXITSTATUS(wstatus);
 }
 
 int			execute_cmd(t_state *s, char **envp)
