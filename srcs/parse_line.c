@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 18:34:48 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 18:34:09 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 23:48:18 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,26 @@
 
 extern	t_state *g_state;
 
-static void	check_tilde(t_state *s)
+static void	check_tilde(t_state *s, t_cmds *cmds)
 {
 	char	**token;
+	t_tok	*tok;
 
-	token = s->cmds->tokens->tokens;
-	while (*token)
+	tok = cmds->tokens;
+	while (tok)
 	{
-		if (ft_strcmp(*token, "~") == 0)
+		token = tok->tokens;
+		while (*token)
 		{
-			frees(*token, 0, 0);
-			*token = ft_strdup(find_env(&(s->env_head), "HOME")->value);
+			if (ft_strcmp(*token, "~") == 0)
+			{
+				frees(*token, 0, 0);
+				*token = ft_strdup(find_env(&(s->env_head),
+							"HOME")->value);
+			}
+			token++;
 		}
-		token++;
+		tok = tok->next;
 	}
 }
 
@@ -50,8 +57,8 @@ void		parse_line(t_state *s, char *input)
 			exit(1);
 		if (!(tokenize(cmds_curr, piped)))
 			exit(1);
+		check_tilde(s, cmds_curr);
 		append_command(&(s->cmds), cmds_curr);
-		check_tilde(s);
 		free_array(piped);
 		i++;
 	}
