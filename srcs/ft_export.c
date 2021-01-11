@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 07:00:32 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 15:46:30 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 16:01:48 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int			ft_export(t_state *s, t_cmd cmd)
 			ft_putstr_fd("sh: export: \'", 2);
 			ft_putstr_fd(&key[0], 2);
 			ft_putstr_fd("\': not a valid identifier\n", 2);
+			frees(key, value, 0);
 			s->exitnum = 1;
 			return (1);
 		}
