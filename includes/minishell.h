@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 01:46:12 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/11 13:18:37 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,9 @@ int					ft_exit();
 */
 void				execute(t_state *s, char **envp);
 int					execute_cmd(t_state *s, char **envp);
+int					execute_builtin(t_state *s, t_cmd cmd);
 int					set_redirection(t_state *s);
 int					search_token(t_state *s, char *c, int *i);
-void				init_cmd(t_cmd *cmd, t_state *s);
 int					get_argv_num(t_cmd cmd);
 
 /*
@@ -175,6 +175,6 @@ void				frees(void *s1, void *s2, void *s3);
 void				free_array(char **arrs);
 void				free_command(t_cmds **cmds);
 void				free_tok(t_tok **tok);
-void				free_exit(t_state *s, int exitnum);
+void				free_after_index(char **argv, int index);
 
 #endif

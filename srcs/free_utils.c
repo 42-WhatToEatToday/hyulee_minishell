@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 16:26:07 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 18:40:26 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 13:16:44 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,17 @@ void	free_command(t_cmds **cmds)
 		*cmds = next_node;
 	}
 	return ;
+}
+
+void	free_after_index(char **argv, int index)
+{
+	int	i;
+
+	i = index;
+	while (argv[index])
+	{
+		free(argv[index]);
+		index++;
+	}
+	argv[i] = NULL;
 }
