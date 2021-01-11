@@ -6,24 +6,34 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/11 15:42:43 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 21:19:24 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	execute_error(t_cmd cmd)
+static void	execute_error(t_cmd cmd, int error_type)
 {
-	ft_putstr_fd("sh: ", 2);
-	ft_putstr_fd(cmd.command, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(strerror(errno), 2);
-	ft_putstr_fd("\n", 2);
-	if (errno == 13)
-		exit(126);
-	else if (errno == 2)
-		exit(127);
-	exit(1);
+	if (error_type == PATH_ERROR)
+	{
+		ft_putstr_fd("sh: ", 2);
+		ft_putstr_fd(cmd.command, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd("command not found\n", 2);
+	}
+	else if (error_type == COMMAND_ERROR)
+	{
+		ft_putstr_fd("sh: ", 2);
+		ft_putstr_fd(cmd.command, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+		if (errno == 13)
+			exit(126);
+		else if (errno == 2)
+			exit(127);
+		exit(1);
+	}
 }
 
 static void	run_child_process(t_state *s, t_cmd cmd, char **envp)
@@ -33,7 +43,7 @@ static void	run_child_process(t_state *s, t_cmd cmd, char **envp)
 	if (s->wrt_fd != STDOUT_FILENO)
 		dup2(s->wrt_fd, STDOUT_FILENO);
 	if (execve(cmd.command, cmd.argv, envp) < 0)
-		execute_error(cmd);
+		execute_error(cmd, COMMAND_ERROR);
 }
 
 static void	init_cmd(t_cmd *cmd, t_state *s)
@@ -69,7 +79,9 @@ static void	execute_pipe(t_state *s, int wrt, char **envp)
 	init_cmd(&cmd, s);
 	if (execute_builtin(s, cmd))
 		return ;
-	check_path(s, &cmd);
+	if (!check_path(s, &cmd))
+		if (!ft_strchr(cmd.command, '/'))
+			return (execute_error(cmd, PATH_ERROR));
 	if ((pid = fork()) < 0)
 		exit(1);
 	if (pid == 0)

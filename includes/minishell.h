@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 15:48:31 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 21:06:38 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@
 # define MAX_COM			100
 
 # define NOT_A_BUILTIN		0
+
+# define COMMAND_ERROR		1
+# define PATH_ERROR		2
 
 # define READ_END			0
 # define WRITE_END			1

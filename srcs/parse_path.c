@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:43:54 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 01:59:38 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/11 21:09:01 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int			check_path(t_state *s, t_cmd *cmd)
 		if (stat(dir, &sb) == 0)
 		{
 			cmd->command = dir;
-			break ;
+			free_array(path);
+			return (1);
 		}
 		frees(dir, 0, 0);
 	}
