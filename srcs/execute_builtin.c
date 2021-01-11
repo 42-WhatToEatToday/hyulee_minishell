@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 13:05:03 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/11 13:16:08 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 13:25:54 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	call_builtin(t_state *s, t_cmd cmd, int *ret)
 		*ret = ft_exit(s, cmd);
 }
 
-int	execute_builtin(t_state *s, t_cmd cmd)
+int			execute_builtin(t_state *s, t_cmd cmd)
 {
 	int ret;
 	int stin;
