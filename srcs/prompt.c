@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 13:04:12 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 21:25:18 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,6 @@ static int	check_escape_end(t_state *s, char **input, int *input_flag)
 	return (0);
 }
 
-static void	check_dir(t_state *s)
-{
-	DIR	*dir;
-
-	dir = opendir(s->input);
-	if (dir == NULL)
-	{
-//		ft_printf("sh: %s: no such file or directory\n", s->input);
-		return ;
-	}
-//	ft_printf("sh: %s: is a directory\n", s->input);
-	(void)closedir(dir);
-}
-
 void		prompt(t_state *s, char **envp)
 {
 	char	*input;
@@ -104,7 +90,6 @@ void		prompt(t_state *s, char **envp)
 			continue;
 		append_input(s, &input);
 		parse_line(s, s->input);
-		check_dir(s);
 		execute(s, envp);
 		frees(s->input, 0, 0);
 		s->input = 0;
