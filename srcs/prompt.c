@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 21:53:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 21:25:18 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/11 21:46:12 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			handle_eof(t_state *s, char **input, int *input_flag)
 	if (ft_strlen(*input) == 0 && ft_strlen(s->input) == 0)
 	{
 		ft_printf("  \b\bexit\n");
-		exit(0);
+		exit(131);
 	}
 	else
 	{

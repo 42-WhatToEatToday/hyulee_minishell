@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:43:54 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 21:09:01 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/11 22:31:55 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,15 @@ char		**parse_path(t_state *s)
 	char	*path;
 	char	**ret;
 
-	path = find_env(&(s->env_head), "PATH")->value;
-	ret = ft_split(path, ':');
+	if (find_env(&(s->env_head), "PATH"))
+	{
+		path = find_env(&(s->env_head), "PATH")->value;
+		ret = ft_split(path, ':');
+	}
+	else
+	{
+		ret = (char **)malloc(sizeof(char *));
+		ret[0] = NULL;
+	}
 	return (ret);
 }
