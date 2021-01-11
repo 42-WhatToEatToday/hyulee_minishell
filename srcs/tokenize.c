@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 13:38:12 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 20:17:03 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 00:40:23 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int				tokenize(t_cmds *cmds, char **piped)
 			return (0);
 		if (!(tokens = split_delimiter(piped[i], ' ')))
 			return (0);
-		remove_quotes(curr, tokens);
+		remove_quotes_backslashes(curr, tokens);
 		curr->tokens = tokens;
 		append_tok(&(cmds->tokens), curr);
 		i++;

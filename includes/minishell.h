@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 21:27:24 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/12 00:40:11 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define TOKENIZE			0x00000004
 # define REDI_IN			0x00000008
 # define REDI_OUT			0x00000010
+# define BACKSLASH			0x00000020
 
 # define MAX_PATH_LENGTH	1000
 # define MAX_STR			1000
@@ -161,7 +162,7 @@ void				sigquit_handler(int signo);
 /*
 ** Functions related to handling strings
 */
-void				remove_quotes(t_tok *tok, char **tokens);
+void				remove_quotes_backslashes(t_tok *tok, char **tokens);
 char				**split_delimiter(char *s, char c);
 int					put_words_in_ret(char **ret, char *s, char c, int flag);
 

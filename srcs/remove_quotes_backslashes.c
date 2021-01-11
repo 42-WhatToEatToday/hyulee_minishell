@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 00:19:55 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/11 01:53:14 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/12 00:40:17 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,14 @@ static void	copy_til_qstart(t_tok *tok, char **new_token, char *tokens, int *j)
 {
 	while (!(tok->flag & QUOTE) && !(tok->flag & DQUOTE) && tokens[(*j)])
 	{
+		if (tokens[(*j)] == '\\' && !(tok->flag & BACKSLASH))
+		{
+			tok->flag ^= BACKSLASH;
+			(*j)++;
+			continue;
+		}
+		if (tok->flag & BACKSLASH)
+			tok->flag ^= BACKSLASH;
 		**new_token = tokens[(*j)++];
 		(*new_token)++;
 		if (tokens[(*j)] == '\'' || tokens[(*j)] == '\"')
@@ -77,12 +85,12 @@ static void	create_new_token(t_tok *tok, char *tokens, char *new_token)
 	*new_token = 0;
 }
 
-void		remove_quotes(t_tok *tok, char **tokens)
+void		remove_quotes_backslashes(t_tok *tok, char **tokens)
 {
 	int		i;
 	char	new_token[MAX_STR];
 
-	i = 1;
+	i = 0;
 	while (tokens[i])
 	{
 		create_new_token(tok, tokens[i], new_token);
@@ -90,4 +98,5 @@ void		remove_quotes(t_tok *tok, char **tokens)
 		tokens[i] = ft_strdup(new_token);
 		++i;
 	}
+	tok->flag = 0;
 }
