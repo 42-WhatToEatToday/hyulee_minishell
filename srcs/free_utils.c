@@ -6,13 +6,11 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 16:26:07 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/12 15:33:13 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 18:51:32 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern t_state *g_state;
 
 void	frees(void *s1, void *s2, void *s3)
 {

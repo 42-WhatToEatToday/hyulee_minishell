@@ -6,13 +6,11 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 18:34:48 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/12 00:03:29 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 18:52:47 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern	t_state *g_state;
 
 static void	check_tilde(t_state *s, t_cmds *cmds)
 {
@@ -28,8 +26,7 @@ static void	check_tilde(t_state *s, t_cmds *cmds)
 			if (ft_strcmp(*token, "~") == 0)
 			{
 				frees(*token, 0, 0);
-				*token = ft_strdup(find_env(&(s->env_head),
-							"HOME")->value);
+				*token = ft_strdup(s->home);
 			}
 			token++;
 		}

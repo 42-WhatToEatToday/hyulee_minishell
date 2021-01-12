@@ -6,13 +6,11 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 07:00:32 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 15:46:54 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 18:52:40 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern		t_state *g_state;
 
 static int	is_valid_identifier(char c)
 {
