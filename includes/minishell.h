@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/12 15:47:30 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 16:17:52 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define PATH_ERROR			2
 # define SYNTAX_ERROR			3
 # define NOFILE_ERROR			4
+# define NOTDIR_ERROR			5
 
 # define READ_END			0
 # define WRITE_END			1
