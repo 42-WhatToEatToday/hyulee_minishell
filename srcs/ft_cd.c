@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 22:24:36 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/12 16:24:56 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 18:58:22 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	print_error(t_state *s, t_cmd cmd, int error_type)
 int		ft_cd(t_state *s, t_cmd cmd)
 {
 	char	buf[MAX_PATH_LENGTH];
-	DIR	*dp;
+	DIR		*dp;
 
 	if (cmd.argv[1] == NULL || ft_strcmp(cmd.argv[1], "~") == 0)
 	{

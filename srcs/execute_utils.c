@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/12 18:09:43 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 18:57:17 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void	run_child_process(t_state *s, t_cmd cmd, char **envp)
 	if (execve(cmd.command, cmd.argv, envp) < 0)
 		execute_error(cmd, COMMAND_ERROR);
 }
-
 
 static void	execute_pipe(t_state *s, int wrt, char **envp)
 {
