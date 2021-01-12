@@ -6,13 +6,11 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 13:38:12 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/12 00:40:23 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 18:54:02 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern t_state *g_state;
 
 int				get_tok_size(t_tok *tok)
 {

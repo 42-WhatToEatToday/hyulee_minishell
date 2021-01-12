@@ -6,13 +6,13 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:40:53 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 19:58:16 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 18:59:55 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_state	*g_state;
+t_state *g_state;
 
 static void	init(t_state *s)
 {
@@ -66,6 +66,8 @@ int			main(int argc, char *argv[], char *envp[])
 	signal(SIGQUIT, (void *)sigquit_handler);
 	parse_env(&(state.env_head), envp);
 	envp_head = get_envp(&(state.env_head));
+	ft_strlcpy(state.home, find_env(&(state.env_head), "HOME")->value,
+			MAX_PATH_LENGTH);
 	prompt(&state, envp_head);
 	free_array(envp_head);
 	return (0);

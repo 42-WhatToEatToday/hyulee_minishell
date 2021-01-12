@@ -6,13 +6,11 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 20:17:18 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 20:24:12 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 18:50:53 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern t_state *g_state;
 
 t_cmds			*create_command(t_tok *data)
 {

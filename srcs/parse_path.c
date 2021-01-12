@@ -6,13 +6,11 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 23:43:54 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 22:31:55 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/12 18:52:52 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern		t_state	*g_state;
 
 static void	bind_path(char *dir, char *path, char *input, int size)
 {

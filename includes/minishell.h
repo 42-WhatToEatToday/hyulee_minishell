@@ -92,6 +92,7 @@ typedef struct		s_state
 	int				rd_fd;
 	int				wrt_fd;
 	int				flag;
+	char			home[MAX_PATH_LENGTH];
 }					t_state;
 
 /*

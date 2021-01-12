@@ -6,13 +6,11 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:16:16 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 15:49:25 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 18:52:10 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern	t_state	*g_state;
 
 int	ft_echo(t_state *s, t_cmd cmd)
 {

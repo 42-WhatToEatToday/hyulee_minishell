@@ -6,13 +6,11 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 06:19:10 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 19:57:51 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 18:51:04 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern t_state	*g_state;
 
 static void	bind_key_value(char *envp, t_env *env, int len)
 {

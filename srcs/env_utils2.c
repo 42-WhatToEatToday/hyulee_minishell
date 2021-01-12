@@ -6,13 +6,11 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 16:23:17 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/10 20:42:18 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 18:51:22 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern	t_state *g_state;
 
 void	seperate_key_value(char *argv, char **key, char **value)
 {
