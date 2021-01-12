@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 01:49:09 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/12 01:24:15 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 14:46:16 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			search_token(t_state *s, char *c, int *i)
 {
 	if (!ft_strcmp(s->curr_cmds->curr_tok->tokens[*i], c))
 		return (*i);
-	return (0);
+	return (-1);
 }
 
 int			set_redirection(t_state *s)
@@ -70,13 +70,13 @@ int			set_redirection(t_state *s)
 	i = 0;
 	while (s->curr_cmds->curr_tok->tokens[i])
 	{
-		if (search_token(s, ">", &i))
+		if (search_token(s, ">", &i) != -1)
 			if (!set_fd(s, ">", i))
 				return (0);
-		if (search_token(s, ">>", &i))
+		if (search_token(s, ">>", &i) != -1)
 			if (!set_fd(s, ">>", i))
 				return (0);
-		if (search_token(s, "<", &i))
+		if (search_token(s, "<", &i) != -1)
 			if (!set_fd(s, "<", i))
 				return (0);
 		++i;
