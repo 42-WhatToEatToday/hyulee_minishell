@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 01:45:03 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/12 01:25:44 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 16:17:52 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define PATH_ERROR			2
 # define SYNTAX_ERROR			3
 # define NOFILE_ERROR			4
+# define NOTDIR_ERROR			5
 
 # define READ_END			0
 # define WRITE_END			1
@@ -116,6 +117,7 @@ int					ft_exit();
 void				execute(t_state *s, char **envp);
 int					execute_cmd(t_state *s, char **envp);
 int					execute_builtin(t_state *s, t_cmd cmd);
+int					init_cmd(t_state *s, t_cmd *cmd);
 int					set_redirection(t_state *s);
 int					search_token(t_state *s, char *c, int *i);
 int					get_argv_num(t_cmd cmd);
@@ -181,6 +183,6 @@ void				frees(void *s1, void *s2, void *s3);
 void				free_array(char **arrs);
 void				free_command(t_cmds **cmds);
 void				free_tok(t_tok **tok);
-void				free_after_index(char **argv, int index);
+void				free_redirection(char **argv, int *index);
 
 #endif

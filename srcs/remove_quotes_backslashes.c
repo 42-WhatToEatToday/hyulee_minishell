@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 00:19:55 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/12 08:57:42 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/12 18:53:55 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,24 @@ static void	toggle_flag(t_tok *tok, char c, int *j)
 		tok->flag ^= DQUOTE;
 		(*j)++;
 	}
+	else if (c == '\\' && !(tok->flag & BACKSLASH))
+	{
+		tok->flag ^= BACKSLASH;
+		(*j)++;
+	}
 }
 
 static void	copy_til_qstart(t_tok *tok, char **new_token, char *tokens, int *j)
 {
 	while (!(tok->flag & QUOTE) && !(tok->flag & DQUOTE) && tokens[(*j)])
 	{
-		if (tokens[(*j)] == '\\' && !(tok->flag & BACKSLASH))
-		{
-			tok->flag ^= BACKSLASH;
-			(*j)++;
-			continue;
-		}
+		if (tokens[(*j)] == '\'' || tokens[(*j)] == '\"' ||
+				(tokens[(*j)] == '\\' && !(tok->flag & BACKSLASH)))
+			break ;
 		if (tok->flag & BACKSLASH)
 			tok->flag ^= BACKSLASH;
 		**new_token = tokens[(*j)++];
 		(*new_token)++;
-		if (tokens[(*j)] == '\'' || tokens[(*j)] == '\"')
-			break ;
 	}
 }
 
@@ -55,8 +55,7 @@ static void	copy_til_qend(t_tok *tok, char **new_token, char *tokens, int *j)
 			++(*j);
 			break ;
 		}
-		**new_token = tokens[(*j)++];
-		(*new_token)++;
+		*(*new_token)++ = tokens[(*j)++];
 	}
 	while (tok->flag & DQUOTE && tokens[(*j)])
 	{
@@ -66,8 +65,12 @@ static void	copy_til_qend(t_tok *tok, char **new_token, char *tokens, int *j)
 			++(*j);
 			break ;
 		}
-		**new_token = tokens[(*j)++];
-		(*new_token)++;
+		if (tokens[(*j)] == '\\' && tokens[(*j) + 1] == '\\'
+				&& !(tok->flag & BACKSLASH))
+			break;
+		*(*new_token)++ = tokens[(*j)++];
+		if (tok->flag & BACKSLASH)
+			tok->flag ^= BACKSLASH;
 	}
 }
 

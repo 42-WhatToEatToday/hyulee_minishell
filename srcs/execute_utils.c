@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 16:30:40 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/11 21:19:24 by kyoukim          ###   ########.fr       */
+/*   Updated: 2021/01/12 18:09:43 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,6 @@ static void	run_child_process(t_state *s, t_cmd cmd, char **envp)
 		execute_error(cmd, COMMAND_ERROR);
 }
 
-static void	init_cmd(t_cmd *cmd, t_state *s)
-{
-	int	i;
-
-	cmd->command = s->curr_cmds->curr_tok->tokens[0];
-	i = 0;
-	while (s->curr_cmds->curr_tok->tokens[i])
-	{
-		if (search_token(s, ">", &i) || search_token(s, ">>", &i)
-				|| search_token(s, "<", &i))
-		{
-			free_after_index(s->curr_cmds->curr_tok->tokens, i);
-			s->curr_cmds->curr_tok->tokens[i] = NULL;
-			break ;
-		}
-		++i;
-	}
-	cmd->argv = s->curr_cmds->curr_tok->tokens;
-	cmd->argv_num = get_argv_num(*cmd);
-}
 
 static void	execute_pipe(t_state *s, int wrt, char **envp)
 {
@@ -76,7 +56,8 @@ static void	execute_pipe(t_state *s, int wrt, char **envp)
 	s->wrt_fd = wrt;
 	if (!set_redirection(s))
 		return ;
-	init_cmd(&cmd, s);
+	if (!init_cmd(s, &cmd))
+		return ;
 	if (execute_builtin(s, cmd))
 		return ;
 	if (!check_path(s, &cmd))

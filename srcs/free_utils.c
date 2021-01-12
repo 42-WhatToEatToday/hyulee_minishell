@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 16:26:07 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/11 22:10:31 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/12 15:33:13 by kyoukim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,16 @@ void	free_command(t_cmds **cmds)
 	return ;
 }
 
-void	free_after_index(char **argv, int index)
+void	free_redirection(char **argv, int *index)
 {
 	int	i;
 
-	i = index;
-	while (argv[index])
+	i = 2;
+	while (i > 0)
 	{
-		free(argv[index]);
-		index++;
+		free(argv[*index]);
+		argv[*index] = NULL;
+		if (--i == 1)
+			(*index)++;
 	}
-	argv[i] = NULL;
 }
