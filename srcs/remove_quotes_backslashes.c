@@ -6,7 +6,7 @@
 /*   By: kyoukim <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 00:19:55 by kyoukim           #+#    #+#             */
-/*   Updated: 2021/01/12 18:53:55 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/12 19:02:57 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	copy_til_qend(t_tok *tok, char **new_token, char *tokens, int *j)
 		}
 		if (tokens[(*j)] == '\\' && tokens[(*j) + 1] == '\\'
 				&& !(tok->flag & BACKSLASH))
-			break;
+			break ;
 		*(*new_token)++ = tokens[(*j)++];
 		if (tok->flag & BACKSLASH)
 			tok->flag ^= BACKSLASH;
