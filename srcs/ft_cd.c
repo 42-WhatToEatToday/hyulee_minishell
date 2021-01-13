@@ -6,7 +6,7 @@
 /*   By: hyulee <hyulee@student.42.kr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 22:24:36 by hyulee            #+#    #+#             */
-/*   Updated: 2021/01/12 19:03:07 by hyulee           ###   ########.fr       */
+/*   Updated: 2021/01/13 20:07:13 by hyulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static int	print_error(t_state *s, t_cmd cmd, int error_type)
 	ft_putstr_fd(cmd.argv[1], 2);
 	if (error_type == NOFILE_ERROR)
 		ft_putstr_fd(": No such file or directory\n", 2);
-	else if (error_type == NOTDIR_ERROR)
-		ft_putstr_fd(": Not a directory\n", 2);
 	s->exitnum = 1;
 	return (1);
 }
@@ -27,7 +25,6 @@ static int	print_error(t_state *s, t_cmd cmd, int error_type)
 int			ft_cd(t_state *s, t_cmd cmd)
 {
 	char	buf[MAX_PATH_LENGTH];
-	DIR		*dp;
 
 	if (cmd.argv[1] == NULL || ft_strcmp(cmd.argv[1], "~") == 0)
 	{
@@ -35,12 +32,6 @@ int			ft_cd(t_state *s, t_cmd cmd)
 		cmd.argv[1] = ft_strdup(s->home);
 		cmd.argv[2] = NULL;
 	}
-	if ((dp = opendir(cmd.argv[1])) == NULL)
-	{
-		closedir(dp);
-		return (print_error(s, cmd, NOTDIR_ERROR));
-	}
-	closedir(dp);
 	if (chdir(cmd.argv[1]) == -1)
 		return (print_error(s, cmd, NOFILE_ERROR));
 	getcwd(buf, MAX_PATH_LENGTH);
