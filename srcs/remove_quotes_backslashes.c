@@ -101,5 +101,4 @@ void		remove_quotes_backslashes(t_tok *tok, char **tokens)
 		tokens[i] = ft_strdup(new_token);
 		++i;
 	}
-	tok->flag = 0;
 }
